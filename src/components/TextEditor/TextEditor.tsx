@@ -7,30 +7,31 @@ import AddFile from '../../assets/addfile.png';
 import AddImg from '../../assets/img.png';
 import AddList from '../../assets/list.png';
 
-const TextEditor = (): React.ReactElement => {
+interface Props {
+    getObjectNote: (obj: Note) => void;
+}
+interface Note {
+    title: string;
+    description: string;
+}
+
+const TextEditor = ({ getObjectNote }: Props): React.ReactElement => {
     const [descriptionValue, setDescriptionValue] = useState('');
     const [titleValue, setTitleValue] = useState('');
     const [selectedValue, setSelectedValue] = useState('');
     const [onClickIcon, setOnClickIcon] = useState(false);
     const [uploadedImg, setUploadedImg] = useState('');
     const [styles, setStyles] = useState<CSSProperties>({});
-
-    console.log(styles);
+    const [, setObjNote] = useState({});
 
     const uploadedImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const files: FileList | null = event.currentTarget.files;
         if (files) Array.from(files).map((file: { name: string }) => setUploadedImg(URL.createObjectURL(file)));
     };
 
-    // const uploadedFile = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    //     const files: FileList | null = event.currentTarget.files;
-    //     if (files) Array.from(files).map((file: { name: string }) => setUploadedImg(URL.createObjectURL(file)));
-    // };
-
-    const test = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    const getSelectedValue = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         setSelectedValue(event.target.value);
-        setStyles({ ...styles, fontSize: `${selectedValue}px` });
-        console.log(selectedValue);
+        setStyles({ ...styles, fontSize: `${event.target.value}px` });
     };
 
     const handleAlignTextLeft = (): void => {
@@ -45,10 +46,19 @@ const TextEditor = (): React.ReactElement => {
         setStyles({ ...styles, textAlign: 'right' });
     };
 
+    const handleGetNote = (): void => {
+        setObjNote({ title: titleValue, desciption: descriptionValue });
+        if (titleValue && descriptionValue !== '') {
+            getObjectNote({ title: titleValue, description: descriptionValue });
+            setTitleValue('');
+            setDescriptionValue('');
+        }
+    };
+
     return (
-        <div className="container">
+        <div className="container-text-editor">
             <div className="header">
-                <select className="select-option" value={selectedValue} onChange={test}>
+                <select className="select-option" value={selectedValue} onChange={getSelectedValue}>
                     <option value="10">10px</option>
                     <option value="12">12px</option>
                     <option value="14">14px</option>
@@ -78,16 +88,9 @@ const TextEditor = (): React.ReactElement => {
                     onChange={(event: React.ChangeEvent<HTMLInputElement>): void => uploadedImage(event)}
                 />
             ) : null}
-            {/* {onClickIcon ? (
-                <input
-                    type="file"
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>): void => uploadedFile(event)}
-                />
-            ) : null} */}
             <div className="notes-info">
                 <textarea
                     className="title"
-                    cols={20}
                     placeholder="Write the title..."
                     value={titleValue}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
@@ -96,7 +99,6 @@ const TextEditor = (): React.ReactElement => {
                 />
                 <textarea
                     className="description"
-                    cols={20}
                     placeholder="Write the desciption..."
                     value={descriptionValue}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
@@ -105,7 +107,9 @@ const TextEditor = (): React.ReactElement => {
                     style={styles}
                 />
                 {uploadedImg ? <img src={uploadedImg} alt="#" className="uploaded-img" /> : null}
-                {/* {uploadedFile ? <div src={uploadedImg} alt="#" className="uploaded-img" /> : null} */}
+                <button className="btn-text-editor" onClick={handleGetNote}>
+                    Save
+                </button>
             </div>
         </div>
     );
