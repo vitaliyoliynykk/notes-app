@@ -9,8 +9,8 @@ function App(): React.ReactElement {
     return (
         <Router>
             <Switch>
-                <Route path="/auth" component={Auth} />
-                <Route path="/notes" component={Notes} />
+                <Route exact path="/auth" component={Auth} />
+                <Route exact path="/notes" component={Notes} />
                 <Route exact path="/">
                     <Redirect to="/notes" />
                 </Route>

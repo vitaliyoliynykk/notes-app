@@ -1,0 +1,25 @@
+.container-search-input {
+    margin: 0 auto;
+    margin-bottom: 15px;
+    padding: 15px;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.search-icon {
+    width: 40px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.search-input {
+    height: 40px;
+    border: none;
+    font-family: 'Amatic SC', cursive;
+    font-size: 25px;
+    &:focus {
+        outline: none;
+    }
+}
