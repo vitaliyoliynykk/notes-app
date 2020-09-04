@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties } from 'react';
+import React, { useState, CSSProperties, useEffect } from 'react';
 import './TextEditor.scss';
 import TextLeft from '../../assets/textleft.png';
 import TextCenter from '../../assets/textcenter.png';
@@ -7,58 +7,47 @@ import AddFile from '../../assets/addfile.png';
 import AddImg from '../../assets/img.png';
 import AddList from '../../assets/list.png';
 
-interface Props {
-    getObjectNote: (obj: Note) => void;
-}
-interface Note {
-    title: string;
-    description: string;
-}
-
-const TextEditor = ({ getObjectNote }: Props): React.ReactElement => {
+const TextEditor = (): React.ReactElement => {
     const [descriptionValue, setDescriptionValue] = useState('');
     const [titleValue, setTitleValue] = useState('');
-    const [selectedValue, setSelectedValue] = useState('');
+    const [fontSize, setFontSize] = useState('');
     const [onClickIcon, setOnClickIcon] = useState(false);
     const [uploadedImg, setUploadedImg] = useState('');
-    const [styles, setStyles] = useState<CSSProperties>({});
-    const [, setObjNote] = useState({});
+    const [styles, setStyles] = useState<CSSProperties>({
+        fontSize: '20px',
+        textAlign: 'left',
+    });
+    const [objNote, setObjNote] = useState({});
 
     const uploadedImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const files: FileList | null = event.currentTarget.files;
         if (files) Array.from(files).map((file: { name: string }) => setUploadedImg(URL.createObjectURL(file)));
     };
 
-    const getSelectedValue = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-        setSelectedValue(event.target.value);
+    const getFontSizeValue = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+        setFontSize(event.target.value);
         setStyles({ ...styles, fontSize: `${event.target.value}px` });
     };
 
-    const handleAlignTextLeft = (): void => {
-        setStyles({ ...styles, textAlign: 'left' });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleAlignText = (textAlign: any): void => {
+        setStyles({ ...styles, textAlign: textAlign });
     };
 
-    const handleAlignTextCenter = (): void => {
-        setStyles({ ...styles, textAlign: 'center' });
-    };
-
-    const handleAlignTextRight = (): void => {
-        setStyles({ ...styles, textAlign: 'right' });
-    };
-
-    const handleGetNote = (): void => {
-        setObjNote({ title: titleValue, desciption: descriptionValue });
-        if (titleValue && descriptionValue !== '') {
-            getObjectNote({ title: titleValue, description: descriptionValue });
-            setTitleValue('');
-            setDescriptionValue('');
-        }
-    };
+    useEffect(() => {
+        setObjNote({
+            title: titleValue,
+            description: descriptionValue,
+            fontSize: `${fontSize}px`,
+            textAlign: '?',
+        });
+        console.log(objNote);
+    }, [titleValue, descriptionValue, fontSize]);
 
     return (
-        <div className="container-text-editor">
-            <div className="header">
-                <select className="select-option" value={selectedValue} onChange={getSelectedValue}>
+        <div className="container-editor">
+            <div className="container-editor__header">
+                <select className="container-editor__select" value={fontSize} onChange={getFontSizeValue}>
                     <option value="10">10px</option>
                     <option value="12">12px</option>
                     <option value="14">14px</option>
@@ -71,15 +60,35 @@ const TextEditor = ({ getObjectNote }: Props): React.ReactElement => {
                     <option value="28">28px</option>
                     <option value="30">30px</option>
                 </select>
-                <div className="icons-block">
-                    <img src={TextLeft} alt="icon" className="icon" onClick={handleAlignTextLeft} />
-                    <img src={TextCenter} alt="icon" className="icon" onClick={handleAlignTextCenter} />
-                    <img src={TextRight} alt="icon" className="icon" onClick={handleAlignTextRight} />
+                <div className="container-editor__img_block">
+                    <img
+                        src={TextLeft}
+                        alt="icon"
+                        className="container-editor__img"
+                        onClick={(): void => handleAlignText('left')}
+                    />
+                    <img
+                        src={TextCenter}
+                        alt="icon"
+                        className="container-editor__img"
+                        onClick={(): void => handleAlignText('center')}
+                    />
+                    <img
+                        src={TextRight}
+                        alt="icon"
+                        className="container-editor__img"
+                        onClick={(): void => handleAlignText('right')}
+                    />
                 </div>
-                <div className="icons-block">
-                    <img src={AddFile} alt="icon" className="icon" />
-                    <img src={AddImg} alt="icon" className="icon" onClick={(): void => setOnClickIcon(!onClickIcon)} />
-                    <img src={AddList} alt="icon" className="icon" />
+                <div className="container-editor__img_block">
+                    <img src={AddFile} alt="icon" className="container-editor__img" />
+                    <img
+                        src={AddImg}
+                        alt="icon"
+                        className="container-editor__img"
+                        onClick={(): void => setOnClickIcon(!onClickIcon)}
+                    />
+                    <img src={AddList} alt="icon" className="container-editor__img" />
                 </div>
             </div>
             {onClickIcon ? (
@@ -88,9 +97,9 @@ const TextEditor = ({ getObjectNote }: Props): React.ReactElement => {
                     onChange={(event: React.ChangeEvent<HTMLInputElement>): void => uploadedImage(event)}
                 />
             ) : null}
-            <div className="notes-info">
+            <div className="container-editor__notes">
                 <textarea
-                    className="title"
+                    className="container-editor__notes_title"
                     placeholder="Write the title..."
                     value={titleValue}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
@@ -98,7 +107,7 @@ const TextEditor = ({ getObjectNote }: Props): React.ReactElement => {
                     }
                 />
                 <textarea
-                    className="description"
+                    className="container-editor__notes_description"
                     placeholder="Write the desciption..."
                     value={descriptionValue}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
@@ -106,10 +115,7 @@ const TextEditor = ({ getObjectNote }: Props): React.ReactElement => {
                     }
                     style={styles}
                 />
-                {uploadedImg ? <img src={uploadedImg} alt="#" className="uploaded-img" /> : null}
-                <button className="btn-text-editor" onClick={handleGetNote}>
-                    Save
-                </button>
+                {uploadedImg ? <img src={uploadedImg} alt="#" className="container-editor__img_uploaded" /> : null}
             </div>
         </div>
     );

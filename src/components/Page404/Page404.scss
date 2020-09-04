@@ -1,12 +1,11 @@
-.container-page-404 {
+.container-page404 {
     text-align: center;
     height: 100vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-
-.sad-smile {
-    width: 250px;
-    margin: 0 auto;
+    &__img {
+        width: 250px;
+        margin: 0 auto;
+    }
 }

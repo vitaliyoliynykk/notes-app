@@ -1,26 +1,33 @@
-.container-note-item {
-    width: 50%;
+.container-note {
     padding: 15px;
     background-color: rgb(0, 0, 0);
-    border-radius: 20px 0 0;
-}
-
-.title-note-item {
     color: rgb(255, 255, 255);
-    width: 80%;
-    margin: 0 auto;
-    font-size: 25px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-}
-
-.description-note-item {
-    font-size: 15px;
-    @extend .title-note-item;
-}
-
-.note-item {
-    padding: 10px;
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &_date {
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+        &_img {
+            width: 25px;
+            cursor: pointer;
+        }
+    }
+    &__bottom {
+        &_title {
+            font-size: 25px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &_description {
+            @extend .container-note__bottom_title;
+            font-size: 15px;
+        }
+    }
+    &__block {
+        padding: 10px;
+    }
 }

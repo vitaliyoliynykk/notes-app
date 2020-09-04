@@ -1,76 +1,56 @@
-.container-text-editor {
-    width: 50%;
+.container-editor {
     border: 2px solid rgb(0, 0, 0);
     padding: 15px;
-    border-radius: 0 20px 0 0;
-}
-
-.header {
-    margin: 0 auto;
-    max-width: 350px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.select-option {
-    font-family: 'Amatic SC', cursive;
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-    border-radius: 10px;
-    font-size: 25px;
-    cursor: pointer;
-    &:focus {
-        outline: none;
+    &__header {
+        height: 50px;
+        margin: 0 auto;
+        max-width: 350px;
+        display: flex;
+        justify-content: space-between;
     }
-}
-
-.icon {
-    width: 30px;
-    margin-right: 5px;
-    cursor: pointer;
-}
-
-.icons-block {
-    display: flex;
-}
-
-.notes-info {
-    @extend .icons-block;
-    margin-top: 15px;
-    flex-direction: column;
-}
-
-.title {
-    font-family: 'Amatic SC', cursive;
-    border: none;
-    resize: none;
-    font-size: 30px;
-    font-weight: 700;
-    &:focus {
-        outline: none;
+    &__select {
+        font-family: 'Amatic SC', cursive;
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        font-size: 25px;
+        cursor: pointer;
+        &:focus {
+            outline: none;
+        }
     }
-}
-
-.description {
-    @extend .title;
-    font-size: 20px;
-    font-weight: normal;
-    height: 150px;
-}
-
-.uploaded-img {
-    width: 400px;
-    height: 300px;
-    object-fit: cover;
-}
-
-.btn-text-editor {
-    font-family: 'Amatic SC', cursive;
-    font-size: 25px;
-    width: 100px;
-    height: 40px;
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-    border-radius: 5px;
-    cursor: pointer;
+    &__img {
+        width: 40px;
+        margin-right: 5px;
+        cursor: pointer;
+        &_uploaded {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+        }
+        &_block {
+            display: flex;
+        }
+    }
+    &__notes {
+        @extend .container-editor__img_block;
+        margin-top: 15px;
+        flex-direction: column;
+        &_title {
+            font-family: 'Amatic SC', cursive;
+            border: none;
+            resize: none;
+            font-size: 30px;
+            font-weight: 700;
+            &:focus {
+                outline: none;
+            }
+        }
+        &_description {
+            @extend .container-editor__notes_title;
+            font-size: 20px;
+            font-weight: normal;
+            height: 150px;
+        }
+    }
 }
