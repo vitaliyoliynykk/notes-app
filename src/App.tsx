@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './App.scss';
 import Auth from './containers/Auth/Auth';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
