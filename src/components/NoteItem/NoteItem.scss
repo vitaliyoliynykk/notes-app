@@ -2,6 +2,12 @@
     padding: 15px;
     background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
+    &:hover {
+        .container-note__header_img {
+            opacity: 1;
+            transition: linear 0.2s;
+        }
+    }
     &__header {
         display: flex;
         justify-content: space-between;
@@ -13,6 +19,8 @@
         &_img {
             width: 25px;
             cursor: pointer;
+            opacity: 0;
+            transition: linear 0.2s;
         }
     }
     &__bottom {

@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SearchInput.scss';
 import SearchIcon from '../../assets/search.png';
+import { Props } from '../../models/models';
 
-const SearchInput = (): React.ReactElement => {
-    const [searchInputValue, setSearchInputValue] = useState('');
-    const getSearchInputValue = (event: React.FormEvent<HTMLInputElement>): void => {
-        setSearchInputValue(event.currentTarget.value);
-        console.log(searchInputValue);
+const SearchInput = ({ getSearchInputValue }: Props): React.ReactElement => {
+    const handleGetSearchInputValue = (event: React.FormEvent<HTMLInputElement>): void => {
+        getSearchInputValue(event.currentTarget.value);
     };
 
     return (
@@ -16,7 +15,7 @@ const SearchInput = (): React.ReactElement => {
                 type="search"
                 placeholder="Search Notes"
                 className="container-search__input"
-                onChange={getSearchInputValue}
+                onChange={handleGetSearchInputValue}
             />
         </div>
     );

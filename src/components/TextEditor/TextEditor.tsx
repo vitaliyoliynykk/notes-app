@@ -10,14 +10,13 @@ import AddList from '../../assets/list.png';
 const TextEditor = (): React.ReactElement => {
     const [descriptionValue, setDescriptionValue] = useState('');
     const [titleValue, setTitleValue] = useState('');
-    const [fontSize, setFontSize] = useState('');
     const [onClickIcon, setOnClickIcon] = useState(false);
     const [uploadedImg, setUploadedImg] = useState('');
+    const [objNote, setObjNote] = useState({});
     const [styles, setStyles] = useState<CSSProperties>({
         fontSize: '20px',
         textAlign: 'left',
     });
-    const [objNote, setObjNote] = useState({});
 
     const uploadedImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const files: FileList | null = event.currentTarget.files;
@@ -25,29 +24,25 @@ const TextEditor = (): React.ReactElement => {
     };
 
     const getFontSizeValue = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-        setFontSize(event.target.value);
         setStyles({ ...styles, fontSize: `${event.target.value}px` });
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleAlignText = (textAlign: any): void => {
-        setStyles({ ...styles, textAlign: textAlign });
+    const handleAlignText = (textAlign: 'left' | 'center' | 'right'): void => {
+        setStyles({ ...styles, textAlign });
     };
 
     useEffect(() => {
         setObjNote({
             title: titleValue,
             description: descriptionValue,
-            fontSize: `${fontSize}px`,
-            textAlign: '?',
+            ...styles,
         });
-        console.log(objNote);
-    }, [titleValue, descriptionValue, fontSize]);
+    }, [titleValue, descriptionValue, styles]);
 
     return (
         <div className="container-editor">
             <div className="container-editor__header">
-                <select className="container-editor__select" value={fontSize} onChange={getFontSizeValue}>
+                <select className="container-editor__select" onChange={getFontSizeValue}>
                     <option value="10">10px</option>
                     <option value="12">12px</option>
                     <option value="14">14px</option>
