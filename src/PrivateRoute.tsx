@@ -9,7 +9,7 @@ const PrivateRoute = ({ component: RouteComponent, path }: { component: any; pat
         <Route
             path={path}
             render={(routerProps): React.ReactNode =>
-                !!currentUser ? <RouteComponent {...routerProps} /> : <Redirect to={'/auth'} />
+                currentUser ? <RouteComponent {...routerProps} /> : <Redirect to={'/auth'} />
             }
         ></Route>
     );

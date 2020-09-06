@@ -16,7 +16,7 @@ class Auth extends React.Component<RouteComponentProps> {
 
     componentDidUpdate(): void {
         const currentUser = this.context;
-        if (!!currentUser) {
+        if (currentUser) {
             this.props.history.push('/notes');
         }
     }
