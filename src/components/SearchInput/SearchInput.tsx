@@ -1,9 +1,9 @@
 import React from 'react';
 import './SearchInput.scss';
 import SearchIcon from '../../assets/search.png';
-import { Props } from '../../models/models';
+import { SearchInputValue } from '../../models/models';
 
-const SearchInput = ({ getSearchInputValue }: Props): React.ReactElement => {
+const SearchInput = ({ getSearchInputValue }: SearchInputValue): React.ReactElement => {
     const handleGetSearchInputValue = (event: React.FormEvent<HTMLInputElement>): void => {
         getSearchInputValue(event.currentTarget.value);
     };
