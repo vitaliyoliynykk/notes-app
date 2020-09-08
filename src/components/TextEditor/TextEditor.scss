@@ -1,0 +1,56 @@
+.container-editor {
+    border: 2px solid rgb(0, 0, 0);
+    padding: 15px;
+    &__header {
+        height: 50px;
+        margin: 0 auto;
+        max-width: 350px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__select {
+        font-family: 'Amatic SC', cursive;
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+        font-size: 25px;
+        cursor: pointer;
+        &:focus {
+            outline: none;
+        }
+    }
+    &__img {
+        width: 40px;
+        margin-right: 5px;
+        cursor: pointer;
+        &_uploaded {
+            width: 400px;
+            height: 300px;
+            object-fit: cover;
+        }
+        &_block {
+            display: flex;
+        }
+    }
+    &__notes {
+        @extend .container-editor__img_block;
+        margin-top: 15px;
+        flex-direction: column;
+        &_title {
+            font-family: 'Amatic SC', cursive;
+            border: none;
+            resize: none;
+            font-size: 30px;
+            font-weight: 700;
+            &:focus {
+                outline: none;
+            }
+        }
+        &_description {
+            @extend .container-editor__notes_title;
+            font-size: 20px;
+            font-weight: normal;
+            height: 150px;
+        }
+    }
+}
