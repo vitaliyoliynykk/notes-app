@@ -5,13 +5,13 @@ import { Note } from '../../models/models';
 
 const NoteItem = ({
     note,
-    removeNoteItem,
+    deleteNoteItem,
 }: {
     note: Note;
-    removeNoteItem: (id: string) => void;
+    deleteNoteItem: (id: string) => void;
 }): React.ReactElement => {
     const handleRemoveNoteItem = (id: string): void => {
-        removeNoteItem(id);
+        deleteNoteItem(id);
     };
 
     return (

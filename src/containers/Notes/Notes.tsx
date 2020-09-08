@@ -25,10 +25,15 @@ class Notes extends React.Component {
             textAlign: 'left',
         },
     ];
+
+    removeNoteItem = (id: string): void => {
+        console.log(id);
+    };
+
     render(): React.ReactElement {
         return (
             <>
-                <NoteItemsList arrayOfNotes={this.arrayOfNotes} />
+                <NoteItemsList arrayOfNotes={this.arrayOfNotes} removeNoteItem={this.removeNoteItem} />
                 <TextEditor noteItem={this.arrayOfNotes[0]} />
             </>
         );
