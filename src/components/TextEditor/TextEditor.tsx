@@ -9,21 +9,25 @@ import AddList from '../../assets/list.png';
 import { v4 as uuidv4 } from 'uuid';
 import { Note } from '../../models/models';
 
-const TextEditor = ({ noteItem }: { noteItem: Note }): React.ReactElement => {
+const defaultNote: Note = {
+    title: 'This is your note',
+    description: 'Write something',
+    date: new Date().toDateString(),
+    id: uuidv4(),
+    fontSize: '10px',
+    textAlign: 'left',
+};
+
+const TextEditor = ({
+    noteItem,
+    onChange,
+}: {
+    noteItem?: Note;
+    onChange: (note: Note) => void;
+}): React.ReactElement => {
     const [onClickIcon, setOnClickIcon] = useState(false);
     const [uploadedImg, setUploadedImg] = useState('');
-    const [objNote, setObjNote] = useState(
-        noteItem
-            ? noteItem
-            : {
-                  title: 'test',
-                  description: 'test',
-                  date: 'test',
-                  id: uuidv4(),
-                  fontSize: '10px',
-                  textAlign: 'left',
-              },
-    );
+    const [objNote, setObjNote] = useState<Note>(noteItem ? noteItem : defaultNote);
 
     const uploadedImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const files: FileList | null = event.currentTarget.files;
@@ -39,8 +43,8 @@ const TextEditor = ({ noteItem }: { noteItem: Note }): React.ReactElement => {
     };
 
     useEffect(() => {
-        console.log(objNote);
-    }, [objNote]);
+        onChange(objNote);
+    }, [objNote, onChange]);
 
     return (
         <div className="container-editor">
