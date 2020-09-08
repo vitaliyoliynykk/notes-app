@@ -25,12 +25,16 @@ class Auth extends React.Component<RouteComponentProps> {
     render(): React.ReactElement {
         return (
             <div className="container-auth">
-                <div className="container-auth__title">Auth component</div>
+                <div className="container-auth__title">Notes App</div>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
                 <footer>
                     <div className="container-auth__footer">Created by:</div>
-                    <div className="container-auth__owner">/vitaliyoliynykk</div>
-                    <div className="container-auth__owner">/leshihak</div>
+                    <a href="https://github.com/vitaliyoliynykk" target="blank" className="container-auth__owner">
+                        https://github.com/vitaliyoliynykk
+                    </a>
+                    <a href="https://github.com/leshihak" target="blank" className="container-auth__owner">
+                        https://github.com/leshihak
+                    </a>
                     <img src={GitHub} alt="logo" className="container-auth__img" />
                 </footer>
             </div>
