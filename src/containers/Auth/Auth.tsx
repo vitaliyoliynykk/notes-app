@@ -2,8 +2,9 @@ import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
 import { AuthContext } from './AuthProvider';
-import { RouteComponentProps } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import './Auth.scss';
+import GitHub from '../../assets/github-logo.png';
 
 const uiConfig = {
     signInFlow: 'popup',
@@ -23,9 +24,15 @@ class Auth extends React.Component<RouteComponentProps> {
 
     render(): React.ReactElement {
         return (
-            <div>
-                <h1>Auth component</h1>
+            <div className="container-auth">
+                <div className="container-auth__title">Auth component</div>
                 <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                <footer>
+                    <div className="container-auth__footer">Created by:</div>
+                    <div className="container-auth__owner">/vitaliyoliynykk</div>
+                    <div className="container-auth__owner">/leshihak</div>
+                    <img src={GitHub} alt="logo" className="container-auth__img" />
+                </footer>
             </div>
         );
     }
