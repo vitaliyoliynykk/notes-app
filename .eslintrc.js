@@ -24,5 +24,6 @@ module.exports = {
         '@typescript-eslint/no-magic-numbers': 2,
         '@typescript-eslint/explicit-function-return-type': 2,
         '@typescript-eslint/no-explicit-any': 2,
+        'react/prop-types': 0,
     },
 };

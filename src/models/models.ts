@@ -14,3 +14,7 @@ export interface SearchInputValue {
 export interface RemoveNoteItem {
     deleteNoteItem: (id: string) => void;
 }
+
+export interface User {
+    name: string;
+}
