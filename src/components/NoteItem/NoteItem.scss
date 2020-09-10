@@ -10,9 +10,7 @@
         color: white;
     }
     &:hover {
-        transition: linear 0.2s;
-        background-color: black;
-        color: white;
+        @extend .container-note--active;
         .container-note__header_img {
             opacity: 1;
             transition: linear 0.2s;
