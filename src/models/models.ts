@@ -15,6 +15,8 @@ export interface RemoveNoteItem {
     deleteNoteItem: (id: string) => void;
 }
 
-export interface User {
-    name: string;
+export interface NotesState {
+    user: firebase.User | null;
+    activeNote: Note | null;
+    notes: Note[];
 }
