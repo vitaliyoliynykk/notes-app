@@ -30,10 +30,10 @@ class Auth extends React.Component<RouteComponentProps> {
                 <footer>
                     <div className="container-auth__footer">Created by:</div>
                     <a href="https://github.com/vitaliyoliynykk" target="blank" className="container-auth__owner">
-                        https://github.com/vitaliyoliynykk
+                        /vitaliyoliynykk
                     </a>
                     <a href="https://github.com/leshihak" target="blank" className="container-auth__owner">
-                        https://github.com/leshihak
+                        /leshihak
                     </a>
                     <img src={GitHub} alt="logo" className="container-auth__img" />
                 </footer>
