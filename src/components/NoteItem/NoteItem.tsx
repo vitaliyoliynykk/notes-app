@@ -6,16 +6,18 @@ import { Note } from '../../models/models';
 const NoteItem = ({
     note,
     deleteNoteItem,
+    isActive,
 }: {
     note: Note;
     deleteNoteItem: (id: string) => void;
+    isActive: boolean;
 }): React.ReactElement => {
     const handleRemoveNoteItem = (id: string): void => {
         deleteNoteItem(id);
     };
 
     return (
-        <div className="container-note">
+        <div className={isActive ? 'container-note container-note--active' : 'container-note'}>
             <div className="container-note__header">
                 <div className="container-note__header_date">{note.date}</div>
                 <img
