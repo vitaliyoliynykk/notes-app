@@ -1,0 +1,49 @@
+.container-note {
+    padding: 15px;
+    background-color: white;
+    color: black;
+    transition: linear 0.2s;
+    cursor: pointer;
+    &--active {
+        transition: linear 0.2s;
+        background-color: black;
+        color: white;
+    }
+    &:hover {
+        @extend .container-note--active;
+        .container-note__header_img {
+            opacity: 1;
+            transition: linear 0.2s;
+        }
+    }
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &_date {
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+        &_img {
+            width: 25px;
+            cursor: pointer;
+            opacity: 0;
+            transition: linear 0.2s;
+        }
+    }
+    &__bottom {
+        &_title {
+            font-size: 25px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &_description {
+            @extend .container-note__bottom_title;
+            font-size: 15px;
+        }
+    }
+    &__block {
+        padding: 10px;
+    }
+}
