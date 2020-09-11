@@ -6,6 +6,7 @@ import './Notes.scss';
 import NoteItemsList from '../../components/NoteItemsList/NoteItemsList';
 import TextEditor from '../../components/TextEditor/TextEditor';
 import { FIRST_ELEMENT, DEFAULT_NOTE } from './Notes.constants';
+import LogOut from '../../assets/logout.png';
 
 class Notes extends React.Component<{}, NotesState> {
     public static contextType = AuthContext;
@@ -67,6 +68,10 @@ class Notes extends React.Component<{}, NotesState> {
         });
     }
 
+    private logOutFromNoteApp(): void {
+        app.auth().signOut();
+    }
+
     public render(): React.ReactElement {
         return (
             <div className="container-notes">
@@ -74,6 +79,7 @@ class Notes extends React.Component<{}, NotesState> {
                     {this.state.user && (
                         <img src={this.state.user.photoURL as string} alt="user" className="user-photo" />
                     )}
+                    <img src={LogOut} alt="icon" className="notes__menu-img" onClick={this.logOutFromNoteApp} />
                 </div>
                 <div className="notes__list">
                     <NoteItemsList

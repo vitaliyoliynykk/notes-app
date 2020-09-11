@@ -9,9 +9,13 @@
         background-color: black;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         padding: 20px 0;
+        &-img {
+            width: 40px;
+            cursor: pointer;
+        }
     }
 
     &__list {
