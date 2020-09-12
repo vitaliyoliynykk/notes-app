@@ -29,7 +29,6 @@ class Notes extends React.Component<{}, NotesState> {
     }
 
     private getNotesFromFirestore(): void {
-        const note = getDefaultNote();
         this.database
             .ref(`/users/${this.context?.uid}/notes`)
             .once('value')
@@ -38,6 +37,7 @@ class Notes extends React.Component<{}, NotesState> {
                     const notes: Note[] = Object.values(snapshot.val());
                     this.setState({ ...this.state, notes, activeNote: notes[FIRST_ELEMENT] });
                 } else {
+                    const note = getDefaultNote();
                     this.setState({ ...this.state, notes: [note], activeNote: note });
                 }
             });

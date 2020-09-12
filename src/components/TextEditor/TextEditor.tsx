@@ -3,7 +3,7 @@ import './TextEditor.scss';
 import TextLeft from '../../assets/textleft.png';
 import TextCenter from '../../assets/textcenter.png';
 import TextRight from '../../assets/textright.png';
-import AddFile from '../../assets/addfile.png';
+import AddFile from '../../assets/addfile.svg';
 import AddImg from '../../assets/img.png';
 import AddList from '../../assets/list.png';
 import { Note } from '../../models/models';
