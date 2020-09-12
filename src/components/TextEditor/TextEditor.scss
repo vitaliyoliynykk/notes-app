@@ -47,9 +47,8 @@
         }
         &_description {
             @extend .container-editor__notes_title;
-            font-size: 20px;
             font-weight: normal;
-            height: 150px;
+            min-height: 500px;
         }
     }
 }
