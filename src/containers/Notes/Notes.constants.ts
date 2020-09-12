@@ -6,7 +6,7 @@ export const getDefaultNote = (): Note => ({
     description: 'Write something...',
     date: new Date().toDateString(),
     id: uuidv4(),
-    fontSize: '30px',
+    fontSize: '20px',
     textAlign: 'left',
 });
 
