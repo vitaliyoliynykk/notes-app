@@ -5,8 +5,9 @@ import { Note, NotesState } from '../../models/models';
 import './Notes.scss';
 import NoteItemsList from '../../components/NoteItemsList/NoteItemsList';
 import TextEditor from '../../components/TextEditor/TextEditor';
-import { FIRST_ELEMENT, DEFAULT_NOTE } from './Notes.constants';
+import { FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import LogOut from '../../assets/logout.png';
+import AddNote from '../../assets/add.png';
 
 class Notes extends React.Component<{}, NotesState> {
     public static contextType = AuthContext;
@@ -28,6 +29,7 @@ class Notes extends React.Component<{}, NotesState> {
     }
 
     private getNotesFromFirestore(): void {
+        const note = getDefaultNote();
         this.database
             .ref(`/users/${this.context?.uid}/notes`)
             .once('value')
@@ -36,7 +38,7 @@ class Notes extends React.Component<{}, NotesState> {
                     const notes: Note[] = Object.values(snapshot.val());
                     this.setState({ ...this.state, notes, activeNote: notes[FIRST_ELEMENT] });
                 } else {
-                    this.setState({ ...this.state, notes: [DEFAULT_NOTE], activeNote: DEFAULT_NOTE });
+                    this.setState({ ...this.state, notes: [note], activeNote: note });
                 }
             });
     }
@@ -68,6 +70,12 @@ class Notes extends React.Component<{}, NotesState> {
         });
     }
 
+    private addNewNote(): void {
+        const note = getDefaultNote();
+        this.setState({ ...this.state, notes: [note, ...this.state.notes], activeNote: note });
+        this.saveNoteToFirebase(note);
+    }
+
     private logOutFromNoteApp(): void {
         app.auth().signOut();
     }
@@ -79,7 +87,13 @@ class Notes extends React.Component<{}, NotesState> {
                     {this.state.user && (
                         <img src={this.state.user.photoURL as string} alt="user" className="user-photo" />
                     )}
-                    <img src={LogOut} alt="icon" className="notes__menu-img" onClick={this.logOutFromNoteApp} />
+                    <img
+                        src={AddNote}
+                        alt="icon"
+                        className="notes__menu-img-add"
+                        onClick={this.addNewNote.bind(this)}
+                    />
+                    <img src={LogOut} alt="icon" className="notes__menu-img-exit" onClick={this.logOutFromNoteApp} />
                 </div>
                 <div className="notes__list">
                     <NoteItemsList

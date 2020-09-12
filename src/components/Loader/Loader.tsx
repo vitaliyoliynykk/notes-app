@@ -1,5 +1,5 @@
 import React from 'react';
-import './ComponentLoader.scss';
+import './Loader.scss';
 
 export const ComponentLoader = (): React.ReactElement => {
     return <div className="loader-component"></div>;
