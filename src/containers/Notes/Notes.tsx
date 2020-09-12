@@ -5,7 +5,7 @@ import { Note, NotesState } from '../../models/models';
 import './Notes.scss';
 import NoteItemsList from '../../components/NoteItemsList/NoteItemsList';
 import TextEditor from '../../components/TextEditor/TextEditor';
-
+import AddNote from '../../assets/addfile.svg';
 import { FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import LogOut from '../../assets/logout.svg';
 
