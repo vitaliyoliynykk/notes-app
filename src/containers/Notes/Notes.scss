@@ -12,9 +12,12 @@
         justify-content: space-between;
         align-items: center;
         padding: 20px 0;
-        &-img {
+        &-img-exit {
             width: 40px;
             cursor: pointer;
+        }
+        &-img-add {
+            @extend .notes__menu-img-exit;
         }
     }
 
