@@ -4,7 +4,7 @@ import firebase from 'firebase';
 import { AuthContext } from './AuthProvider';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import './Auth.scss';
-import GitHub from '../../assets/github-logo.png';
+import GitHub from '../../assets/github-logo.svg';
 
 const uiConfig = {
     signInFlow: 'popup',

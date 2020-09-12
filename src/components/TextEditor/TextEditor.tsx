@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './TextEditor.scss';
-import TextLeft from '../../assets/textleft.png';
-import TextCenter from '../../assets/textcenter.png';
-import TextRight from '../../assets/textright.png';
-import AddFile from '../../assets/addfile.png';
-import AddImg from '../../assets/img.png';
-import AddList from '../../assets/list.png';
+import TextLeft from '../../assets/textleft.svg';
+import TextCenter from '../../assets/textcenter.svg';
+import TextRight from '../../assets/textright.svg';
+import AddFile from '../../assets/addfile.svg';
+import AddImg from '../../assets/img.svg';
+import AddList from '../../assets/list.svg';
 import { Note } from '../../models/models';
 
 const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: Note) => void }): React.ReactElement => {
@@ -47,16 +47,14 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
             <div className="container-editor__header">
                 <select className="container-editor__select" onChange={handleFontSize}>
                     <option value="10">10px</option>
-                    <option value="12">12px</option>
                     <option value="14">14px</option>
-                    <option value="16">16px</option>
                     <option value="18">18px</option>
-                    <option value="20">20px</option>
                     <option value="22">22px</option>
-                    <option value="24">24px</option>
                     <option value="26">26px</option>
-                    <option value="28">28px</option>
                     <option value="30">30px</option>
+                    <option value="34">34px</option>
+                    <option value="38">38px</option>
+                    <option value="42">42px</option>
                 </select>
                 <div className="container-editor__img_block">
                     <img
@@ -106,6 +104,7 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
                     className="container-editor__notes_description"
                     placeholder="Write the desciption..."
                     value={objNote.description}
+                    contentEditable
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
                         handleTextArea(event, 'description')
                     }

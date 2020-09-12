@@ -1,5 +1,5 @@
 import React from 'react';
-import SadSmile from '../../assets/sad.png';
+import SadSmile from '../../assets/sadsmile.svg';
 import './Page404.scss';
 
 const Page404 = (): React.ReactElement => {
