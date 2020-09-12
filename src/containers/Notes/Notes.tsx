@@ -6,7 +6,7 @@ import './Notes.scss';
 import NoteItemsList from '../../components/NoteItemsList/NoteItemsList';
 import TextEditor from '../../components/TextEditor/TextEditor';
 import { FIRST_ELEMENT, DEFAULT_NOTE } from './Notes.constants';
-import LogOut from '../../assets/logout.png';
+import LogOut from '../../assets/logout.svg';
 
 class Notes extends React.Component<{}, NotesState> {
     public static contextType = AuthContext;

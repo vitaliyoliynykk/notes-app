@@ -1,6 +1,6 @@
 import React from 'react';
 import './NoteItem.scss';
-import RemoveImg from '../../assets/remove.png';
+import RemoveImg from '../../assets/remove.svg';
 import { Note } from '../../models/models';
 
 const NoteItem = ({
