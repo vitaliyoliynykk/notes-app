@@ -63,3 +63,9 @@
         }
     }
 }
+
+.container-modal__block--dark {
+    @extend .container-modal__block;
+    background-color: white;
+    color: black;
+}

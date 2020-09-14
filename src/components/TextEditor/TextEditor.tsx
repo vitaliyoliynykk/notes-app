@@ -7,7 +7,15 @@ import AddImg from '../../assets/img.svg';
 import AddList from '../../assets/list.svg';
 import { Note } from '../../models/models';
 
-const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: Note) => void }): React.ReactElement => {
+const TextEditor = ({
+    noteItem,
+    onChange,
+    darkMode,
+}: {
+    noteItem: Note;
+    onChange: (note: Note) => void;
+    darkMode: boolean;
+}): React.ReactElement => {
     const [onClickIcon, setOnClickIcon] = useState(false);
     const [uploadedImg, setUploadedImg] = useState('');
     const [objNote, setObjNote] = useState<Note>(noteItem);
@@ -42,9 +50,12 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
     };
 
     return (
-        <div className="container-editor">
+        <div className={darkMode ? 'container-editor--dark' : 'container-editor'}>
             <div className="container-editor__header">
-                <select className="container-editor__select" onChange={handleFontSize}>
+                <select
+                    className={darkMode ? 'container-editor--dark__select' : 'container-editor__select'}
+                    onChange={handleFontSize}
+                >
                     <option value="10">10px</option>
                     <option value="14">14px</option>
                     <option value="18">18px</option>
@@ -59,19 +70,19 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
                     <img
                         src={TextLeft}
                         alt="icon"
-                        className="container-editor__img"
+                        className={darkMode ? 'container-editor--dark__img' : 'container-editor__img'}
                         onClick={(): void => handleAlignText('left')}
                     />
                     <img
                         src={TextCenter}
                         alt="icon"
-                        className="container-editor__img"
+                        className={darkMode ? 'container-editor--dark__img' : 'container-editor__img'}
                         onClick={(): void => handleAlignText('center')}
                     />
                     <img
                         src={TextRight}
                         alt="icon"
-                        className="container-editor__img"
+                        className={darkMode ? 'container-editor--dark__img' : 'container-editor__img'}
                         onClick={(): void => handleAlignText('right')}
                     />
                 </div>
@@ -79,10 +90,14 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
                     <img
                         src={AddImg}
                         alt="icon"
-                        className="container-editor__img"
+                        className={darkMode ? 'container-editor--dark__img' : 'container-editor__img'}
                         onClick={(): void => setOnClickIcon(!onClickIcon)}
                     />
-                    <img src={AddList} alt="icon" className="container-editor__img" />
+                    <img
+                        src={AddList}
+                        alt="icon"
+                        className={darkMode ? 'container-editor--dark__img' : 'container-editor__img'}
+                    />
                 </div>
             </div>
             {onClickIcon ? (
@@ -93,13 +108,15 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
             ) : null}
             <div className="container-editor__notes">
                 <textarea
-                    className="container-editor__notes_title"
+                    className={darkMode ? 'container-editor--dark__notes_title' : 'container-editor__notes_title'}
                     placeholder="Write the title..."
                     value={objNote.title}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void => handleTextArea(event, 'title')}
                 />
                 <textarea
-                    className="container-editor__notes_description"
+                    className={
+                        darkMode ? 'container-editor--dark__notes_description' : 'container-editor__notes_description'
+                    }
                     placeholder="Write the desciption..."
                     value={objNote.description}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>

@@ -12,18 +12,20 @@
         justify-content: space-between;
         align-items: center;
         padding: 20px 0;
-        &-img-exit {
-            width: 40px;
-            cursor: pointer;
-        }
-        &-img-add {
-            @extend .notes__menu-img-exit;
-        }
     }
-
+    &__img {
+        padding: 5px;
+        width: 40px;
+        cursor: pointer;
+        border-radius: 10px;
+    }
     &__list {
         width: 100%;
-        overflow: hidden;
+        overflow: scroll;
+        &::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
     }
 }
 
@@ -31,4 +33,22 @@
     width: 50px;
     height: 50px;
     border-radius: 50px;
+}
+
+.notes {
+    &__menu--dark {
+        @extend .notes__menu;
+        background-color: white;
+    }
+    &__img--dark {
+        @extend .notes__img;
+        background-color: black;
+    }
+    &__list--dark {
+        @extend .notes__list;
+        background-color: black;
+    }
+    &__editor--dark {
+        background-color: black;
+    }
 }

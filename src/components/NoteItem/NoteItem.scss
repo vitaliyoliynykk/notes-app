@@ -47,3 +47,15 @@
         padding: 10px;
     }
 }
+
+.container-note--active--dark {
+    @extend .container-note--active;
+    &:hover {
+        background-color: white;
+        color: black;
+        .container-note__header_img {
+            opacity: 1;
+            transition: linear 0.2s;
+        }
+    }
+}

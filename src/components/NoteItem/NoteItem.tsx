@@ -8,10 +8,12 @@ const NoteItem = ({
     note,
     deleteNoteItem,
     isActive,
+    darkMode,
 }: {
     note: Note;
     deleteNoteItem: (id: string) => void;
     isActive: boolean;
+    darkMode: boolean;
 }): React.ReactElement => {
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -30,8 +32,12 @@ const NoteItem = ({
 
     const removeModalTitle = 'Do you really want to remove a Note?';
 
+    let noteClass = 'container-note';
+    if (darkMode) noteClass += ' container-note--active--dark';
+    else if (darkMode || isActive) noteClass += ' container-note--active';
+
     return (
-        <div className={isActive ? 'container-note container-note--active' : 'container-note'}>
+        <div className={noteClass}>
             <div className="container-note__header">
                 <div className="container-note__header_date">{note.date}</div>
                 <img src={RemoveImg} alt="#" className="container-note__header_img" onClick={openModal} />
@@ -45,6 +51,7 @@ const NoteItem = ({
                     closeModal={closeModal}
                     handleRemove={(): void => handleRemoveNoteItem(note.id)}
                     modalTitle={removeModalTitle}
+                    darkMode={darkMode}
                 />
             ) : null}
         </div>

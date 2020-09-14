@@ -9,8 +9,8 @@
     }
     &__select {
         font-family: 'Amatic SC', cursive;
-        background-color: rgb(0, 0, 0);
-        color: rgb(255, 255, 255);
+        background-color: black;
+        color: white;
         border-radius: 10px;
         font-size: 25px;
         cursor: pointer;
@@ -19,6 +19,8 @@
         }
     }
     &__img {
+        padding: 5px;
+        border-radius: 10px;
         width: 40px;
         margin-right: 5px;
         cursor: pointer;
@@ -49,6 +51,30 @@
             @extend .container-editor__notes_title;
             font-weight: normal;
             min-height: 500px;
+        }
+    }
+}
+
+.container-editor--dark {
+    @extend .container-editor;
+    background-color: black;
+    &__select {
+        @extend .container-editor__select;
+        background-color: white;
+        color: black;
+    }
+    &__img {
+        @extend .container-editor__img;
+        background-color: white;
+    }
+    &__notes {
+        &_title {
+            @extend .container-editor__notes_title;
+            background-color: black;
+            color: white;
+        }
+        &_description {
+            @extend .container-editor__notes_description, .container-editor--dark__notes_title;
         }
     }
 }

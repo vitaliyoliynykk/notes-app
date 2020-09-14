@@ -19,10 +19,5 @@ export interface NotesState {
     user: firebase.User | null;
     activeNote: Note | null;
     notes: Note[];
-}
-
-export interface CloseModal {
-    closeModal: () => void;
-    handleRemove: () => void;
-    modalTitle: string;
+    darkMode: boolean;
 }

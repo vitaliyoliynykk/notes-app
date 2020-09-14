@@ -8,6 +8,8 @@ import TextEditor from '../../components/TextEditor/TextEditor';
 import AddNote from '../../assets/addnote.svg';
 import { FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import LogOut from '../../assets/logout.svg';
+import DarkMode from '../../assets/moon.svg';
+import LightMode from '../../assets/sunlight.svg';
 
 class Notes extends React.Component<{}, NotesState> {
     public static contextType = AuthContext;
@@ -20,6 +22,7 @@ class Notes extends React.Component<{}, NotesState> {
             user: null,
             activeNote: null,
             notes: [],
+            darkMode: false,
         };
     }
 
@@ -83,34 +86,57 @@ class Notes extends React.Component<{}, NotesState> {
         this.setState({ ...this.state, notes: this.state.notes.filter((note) => note.id !== id) });
     }
 
+    private switchDarkMode(): void {
+        this.setState({ ...this.state, darkMode: true });
+    }
+
     public render(): React.ReactElement {
         return (
             <div className="container-notes">
-                <div className="notes__menu">
+                <div className={this.state.darkMode ? 'notes__menu--dark' : 'notes__menu'}>
                     {this.state.user && (
                         <img src={this.state.user.photoURL as string} alt="user" className="user-photo" />
                     )}
                     <img
                         src={AddNote}
                         alt="icon"
-                        className="notes__menu-img-add"
+                        className={this.state.darkMode ? 'notes__img--dark' : 'notes__img'}
                         onClick={this.addNewNote.bind(this)}
                     />
-                    <img src={LogOut} alt="icon" className="notes__menu-img-exit" onClick={this.logOutFromNoteApp} />
+                    <img
+                        src={DarkMode}
+                        alt="darkmode"
+                        className={this.state.darkMode ? 'notes__img--dark' : 'notes__img'}
+                        onClick={this.switchDarkMode.bind(this)}
+                    />
+                    <img
+                        src={LightMode}
+                        alt="lightmode"
+                        className={this.state.darkMode ? 'notes__img--dark' : 'notes__img'}
+                        onClick={(): void => this.setState({ ...this.state, darkMode: false })}
+                    />
+                    <img
+                        src={LogOut}
+                        alt="icon"
+                        className={this.state.darkMode ? 'notes__img--dark' : 'notes__img'}
+                        onClick={this.logOutFromNoteApp}
+                    />
                 </div>
-                <div className="notes__list">
+                <div className={this.state.darkMode ? 'notes__list--dark' : 'notes__list'}>
                     <NoteItemsList
                         arrayOfNotes={this.state.notes}
                         removeNoteItem={this.removeNoteItem.bind(this)}
                         selectNoteItem={this.setActiveNote.bind(this)}
                         activeNoteIdProp={this.state.activeNote?.id}
+                        darkMode={this.state.darkMode}
                     ></NoteItemsList>
                 </div>
-                <div className="notes__editor">
+                <div className={this.state.darkMode ? 'notes__editor--dark' : 'notes__editor'}>
                     {this.state.activeNote ? (
                         <TextEditor
                             noteItem={this.state.activeNote}
                             onChange={(note): void => this.onNoteChange(note)}
+                            darkMode={this.state.darkMode}
                         ></TextEditor>
                     ) : null}
                 </div>

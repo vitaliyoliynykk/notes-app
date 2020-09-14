@@ -2,16 +2,25 @@ import React from 'react';
 import './RemoveModal.scss';
 import ReactModal from 'react-modal';
 import RemoveImg from '../../assets/remove.svg';
-import { CloseModal } from '../../models/models';
 
-export const RemoveModal = ({ closeModal, handleRemove, modalTitle }: CloseModal): React.ReactElement => {
+export const RemoveModal = ({
+    closeModal,
+    handleRemove,
+    modalTitle,
+    darkMode,
+}: {
+    closeModal: () => void;
+    handleRemove: () => void;
+    modalTitle: string;
+    darkMode: boolean;
+}): React.ReactElement => {
     return (
         <div className="container-modal">
             <ReactModal
                 isOpen={true}
                 onRequestClose={closeModal}
                 ariaHideApp={false}
-                className="container-modal__block"
+                className={darkMode ? 'container-modal__block--dark' : 'container-modal__block'}
             >
                 <div className="container-modal__block--close">
                     <img
