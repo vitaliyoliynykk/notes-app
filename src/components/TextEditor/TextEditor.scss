@@ -37,6 +37,7 @@
         @extend .container-editor__img_block;
         margin-top: 15px;
         flex-direction: column;
+        transition: linear 0.2s;
         &_title {
             font-family: 'Amatic SC', cursive;
             border: none;
@@ -58,20 +59,24 @@
 .container-editor--dark {
     @extend .container-editor;
     background-color: black;
+    transition: linear 0.2s;
     &__select {
         @extend .container-editor__select;
         background-color: white;
         color: black;
+        transition: linear 0.2s;
     }
     &__img {
         @extend .container-editor__img;
         background-color: white;
+        transition: linear 0.2s;
     }
     &__notes {
         &_title {
             @extend .container-editor__notes_title;
             background-color: black;
             color: white;
+            transition: linear 0.2s;
         }
         &_description {
             @extend .container-editor__notes_description, .container-editor--dark__notes_title;

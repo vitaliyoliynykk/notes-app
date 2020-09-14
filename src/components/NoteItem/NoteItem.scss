@@ -48,8 +48,13 @@
     }
 }
 
-.container-note--active--dark {
-    @extend .container-note--active;
+.container-note--dark {
+    padding: 15px;
+    transition: linear 0.2s;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    transition: linear 0.2s;
     &:hover {
         background-color: white;
         color: black;
@@ -57,5 +62,10 @@
             opacity: 1;
             transition: linear 0.2s;
         }
+    }
+    &--active {
+        @extend .container-note--active;
+        background-color: white;
+        color: black;
     }
 }

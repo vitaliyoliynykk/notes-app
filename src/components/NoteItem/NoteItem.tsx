@@ -33,8 +33,9 @@ const NoteItem = ({
     const removeModalTitle = 'Do you really want to remove a Note?';
 
     let noteClass = 'container-note';
-    if (darkMode) noteClass += ' container-note--active--dark';
-    else if (darkMode || isActive) noteClass += ' container-note--active';
+    if (darkMode) noteClass += '--dark';
+    if (darkMode && isActive) noteClass += ' container-note--dark--active';
+    else if (!darkMode && isActive) noteClass += ' container-note--active';
 
     return (
         <div className={noteClass}>
