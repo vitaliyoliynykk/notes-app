@@ -20,3 +20,9 @@ export interface NotesState {
     activeNote: Note | null;
     notes: Note[];
 }
+
+export interface CloseModal {
+    closeModal: () => void;
+    handleRemove: () => void;
+    modalTitle: string;
+}

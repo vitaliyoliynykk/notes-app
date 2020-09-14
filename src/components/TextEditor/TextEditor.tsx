@@ -3,7 +3,6 @@ import './TextEditor.scss';
 import TextLeft from '../../assets/textleft.svg';
 import TextCenter from '../../assets/textcenter.svg';
 import TextRight from '../../assets/textright.svg';
-import AddFile from '../../assets/addfile.svg';
 import AddImg from '../../assets/img.svg';
 import AddList from '../../assets/list.svg';
 import { Note } from '../../models/models';
@@ -77,7 +76,6 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
                     />
                 </div>
                 <div className="container-editor__img_block">
-                    <img src={AddFile} alt="icon" className="container-editor__img" />
                     <img
                         src={AddImg}
                         alt="icon"
@@ -104,7 +102,6 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
                     className="container-editor__notes_description"
                     placeholder="Write the desciption..."
                     value={objNote.description}
-                    contentEditable
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
                         handleTextArea(event, 'description')
                     }

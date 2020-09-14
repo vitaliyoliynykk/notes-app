@@ -47,7 +47,6 @@ class Notes extends React.Component<{}, NotesState> {
         const stateNotes = this.state.notes;
         const indexToEdit = stateNotes.findIndex((stateNote) => stateNote.id === note.id);
         stateNotes[indexToEdit] = note;
-
         return stateNotes;
     }
 
@@ -80,6 +79,10 @@ class Notes extends React.Component<{}, NotesState> {
         app.auth().signOut();
     }
 
+    private removeNoteItem(id: string): void {
+        this.setState({ ...this.state, notes: this.state.notes.filter((note) => note.id !== id) });
+    }
+
     public render(): React.ReactElement {
         return (
             <div className="container-notes">
@@ -98,7 +101,7 @@ class Notes extends React.Component<{}, NotesState> {
                 <div className="notes__list">
                     <NoteItemsList
                         arrayOfNotes={this.state.notes}
-                        removeNoteItem={(): null => null}
+                        removeNoteItem={this.removeNoteItem.bind(this)}
                         selectNoteItem={this.setActiveNote.bind(this)}
                         activeNoteIdProp={this.state.activeNote?.id}
                     ></NoteItemsList>
