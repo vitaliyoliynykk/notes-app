@@ -22,7 +22,7 @@ class Notes extends React.Component<{}, NotesState> {
             user: null,
             activeNote: null,
             notes: [],
-            darkMode: false,
+            isDarkMode: false,
         };
     }
 
@@ -87,56 +87,56 @@ class Notes extends React.Component<{}, NotesState> {
     }
 
     private switchDarkMode(): void {
-        this.setState({ ...this.state, darkMode: true });
+        this.setState({ ...this.state, isDarkMode: true });
     }
 
     public render(): React.ReactElement {
         return (
             <div className="container-notes">
-                <div className={this.state.darkMode ? 'notes__menu--dark' : 'notes__menu'}>
+                <div className={this.state.isDarkMode ? 'notes__menu notes__menu--dark' : 'notes__menu'}>
                     {this.state.user && (
                         <img src={this.state.user.photoURL as string} alt="user" className="user-photo" />
                     )}
                     <img
                         src={AddNote}
-                        alt="icon"
-                        className={this.state.darkMode ? 'notes__img--dark' : 'notes__img'}
+                        alt="add note"
+                        className={this.state.isDarkMode ? 'notes__img notes__img--dark' : 'notes__img'}
                         onClick={this.addNewNote.bind(this)}
                     />
                     <img
                         src={DarkMode}
-                        alt="darkmode"
-                        className={this.state.darkMode ? 'notes__img--dark' : 'notes__img'}
+                        alt="dark mode"
+                        className={this.state.isDarkMode ? 'notes__img notes__img--dark' : 'notes__img'}
                         onClick={this.switchDarkMode.bind(this)}
                     />
                     <img
                         src={LightMode}
-                        alt="lightmode"
-                        className={this.state.darkMode ? 'notes__img--dark' : 'notes__img'}
-                        onClick={(): void => this.setState({ ...this.state, darkMode: false })}
+                        alt="light mode"
+                        className={this.state.isDarkMode ? 'notes__img notes__img--dark' : 'notes__img'}
+                        onClick={(): void => this.setState({ ...this.state, isDarkMode: false })}
                     />
                     <img
                         src={LogOut}
-                        alt="icon"
-                        className={this.state.darkMode ? 'notes__img--dark' : 'notes__img'}
+                        alt="log out"
+                        className={this.state.isDarkMode ? 'notes__img notes__img--dark' : 'notes__img'}
                         onClick={this.logOutFromNoteApp}
                     />
                 </div>
-                <div className={this.state.darkMode ? 'notes__list--dark' : 'notes__list'}>
+                <div className={this.state.isDarkMode ? 'notes__list notes__list--dark' : 'notes__list'}>
                     <NoteItemsList
                         arrayOfNotes={this.state.notes}
                         removeNoteItem={this.removeNoteItem.bind(this)}
                         selectNoteItem={this.setActiveNote.bind(this)}
                         activeNoteIdProp={this.state.activeNote?.id}
-                        darkMode={this.state.darkMode}
+                        isDarkMode={this.state.isDarkMode}
                     ></NoteItemsList>
                 </div>
-                <div className={this.state.darkMode ? 'notes__editor--dark' : 'notes__editor'}>
+                <div className={this.state.isDarkMode ? 'notes__editor notes__editor--dark' : 'notes__editor'}>
                     {this.state.activeNote ? (
                         <TextEditor
                             noteItem={this.state.activeNote}
                             onChange={(note): void => this.onNoteChange(note)}
-                            darkMode={this.state.darkMode}
+                            isDarkMode={this.state.isDarkMode}
                         ></TextEditor>
                     ) : null}
                 </div>

@@ -7,12 +7,12 @@ export const RemoveModal = ({
     closeModal,
     handleRemove,
     modalTitle,
-    darkMode,
+    isDarkMode,
 }: {
     closeModal: () => void;
     handleRemove: () => void;
     modalTitle: string;
-    darkMode: boolean;
+    isDarkMode: boolean;
 }): React.ReactElement => {
     return (
         <div className="container-modal">
@@ -20,27 +20,29 @@ export const RemoveModal = ({
                 isOpen={true}
                 onRequestClose={closeModal}
                 ariaHideApp={false}
-                className={darkMode ? 'container-modal__block--dark' : 'container-modal__block'}
+                className={
+                    isDarkMode ? 'container-modal__block container-modal__block--dark' : 'container-modal__block'
+                }
             >
-                <div className="container-modal__block--close">
+                <div className="container-modal__block_img">
                     <img
                         src={RemoveImg}
-                        alt="close"
+                        alt="close icon"
                         onClick={closeModal}
-                        className="container-modal__block--close-img"
+                        className="container-modal__block_img--close"
                     />
                 </div>
-                <div className="container-modal__block--title">{modalTitle}</div>
-                <div className="container-modal__block--btns">
+                <div className="container-modal__block_title">{modalTitle}</div>
+                <div className="container-modal__block_btns">
                     <button
-                        className="container-modal__block--btn container-modal__block--btn-dark"
+                        className="container-modal__block_btn container-modal__block_btn--dark"
                         onClick={handleRemove}
                     >
                         Yes
                     </button>
                     <button
                         onClick={closeModal}
-                        className="container-modal__block--btn container-modal__block--btn-light"
+                        className="container-modal__block_btn container-modal__block_btn--light"
                     >
                         No
                     </button>

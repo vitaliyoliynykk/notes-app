@@ -3,17 +3,19 @@ import './NoteItem.scss';
 import RemoveImg from '../../assets/remove.svg';
 import { Note } from '../../models/models';
 import RemoveModal from '../RemoveModal/RemoveModal';
+import { REMOVE_NOTE_TITLE } from './NoteItem.constants';
+import classNames from 'classnames';
 
 const NoteItem = ({
     note,
     deleteNoteItem,
     isActive,
-    darkMode,
+    isDarkMode,
 }: {
     note: Note;
     deleteNoteItem: (id: string) => void;
     isActive: boolean;
-    darkMode: boolean;
+    isDarkMode: boolean;
 }): React.ReactElement => {
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -30,18 +32,18 @@ const NoteItem = ({
         deleteNoteItem(id);
     };
 
-    const removeModalTitle = 'Do you really want to remove a Note?';
-
-    let noteClass = 'container-note';
-    if (darkMode) noteClass += '--dark';
-    if (darkMode && isActive) noteClass += ' container-note--dark--active';
-    else if (!darkMode && isActive) noteClass += ' container-note--active';
+    const noteClass = classNames({
+        'container-note--dark': isDarkMode,
+        'container-note': !isDarkMode,
+        'container-note--dark--active': isDarkMode && isActive,
+        'container-note--active': !isDarkMode && isActive,
+    });
 
     return (
         <div className={noteClass}>
             <div className="container-note__header">
                 <div className="container-note__header_date">{note.date}</div>
-                <img src={RemoveImg} alt="#" className="container-note__header_img" onClick={openModal} />
+                <img src={RemoveImg} alt="remove icon" className="container-note__header_img" onClick={openModal} />
             </div>
             <div className="container-note__bottom">
                 <div className="container-note__bottom_title">{note.title}</div>
@@ -51,8 +53,8 @@ const NoteItem = ({
                 <RemoveModal
                     closeModal={closeModal}
                     handleRemove={(): void => handleRemoveNoteItem(note.id)}
-                    modalTitle={removeModalTitle}
-                    darkMode={darkMode}
+                    modalTitle={REMOVE_NOTE_TITLE}
+                    isDarkMode={isDarkMode}
                 />
             ) : null}
         </div>

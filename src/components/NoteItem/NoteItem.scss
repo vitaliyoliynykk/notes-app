@@ -4,6 +4,25 @@
     color: black;
     transition: linear 0.2s;
     cursor: pointer;
+    &--dark {
+        padding: 15px;
+        transition: linear 0.2s;
+        cursor: pointer;
+        background-color: black;
+        color: white;
+        &:hover {
+            @extend .container-note--dark--active;
+            .container-note__header_img {
+                opacity: 1;
+                transition: linear 0.2s;
+            }
+        }
+        &--active {
+            transition: linear 0.2s;
+            background-color: white;
+            color: black;
+        }
+    }
     &--active {
         transition: linear 0.2s;
         background-color: black;
@@ -45,27 +64,5 @@
     }
     &__block {
         padding: 10px;
-    }
-}
-
-.container-note--dark {
-    padding: 15px;
-    transition: linear 0.2s;
-    cursor: pointer;
-    background-color: black;
-    color: white;
-    transition: linear 0.2s;
-    &:hover {
-        background-color: white;
-        color: black;
-        .container-note__header_img {
-            opacity: 1;
-            transition: linear 0.2s;
-        }
-    }
-    &--active {
-        @extend .container-note--active;
-        background-color: white;
-        color: black;
     }
 }

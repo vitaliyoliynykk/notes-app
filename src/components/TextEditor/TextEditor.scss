@@ -1,5 +1,9 @@
 .container-editor {
     padding: 15px;
+    &--dark {
+        background-color: black;
+        transition: linear 0.2s;
+    }
     &__header {
         height: 50px;
         margin: 0 auto;
@@ -17,6 +21,11 @@
         &:focus {
             outline: none;
         }
+        &--dark {
+            background-color: white;
+            color: black;
+            transition: linear 0.2s;
+        }
     }
     &__img {
         padding: 5px;
@@ -31,6 +40,10 @@
         }
         &_block {
             display: flex;
+        }
+        &--dark {
+            background-color: white;
+            transition: linear 0.2s;
         }
     }
     &__notes {
@@ -47,39 +60,18 @@
             &:focus {
                 outline: none;
             }
+            &--dark {
+                background-color: black;
+                color: white;
+            }
         }
         &_description {
             @extend .container-editor__notes_title;
             font-weight: normal;
             min-height: 500px;
-        }
-    }
-}
-
-.container-editor--dark {
-    @extend .container-editor;
-    background-color: black;
-    transition: linear 0.2s;
-    &__select {
-        @extend .container-editor__select;
-        background-color: white;
-        color: black;
-        transition: linear 0.2s;
-    }
-    &__img {
-        @extend .container-editor__img;
-        background-color: white;
-        transition: linear 0.2s;
-    }
-    &__notes {
-        &_title {
-            @extend .container-editor__notes_title;
-            background-color: black;
-            color: white;
-            transition: linear 0.2s;
-        }
-        &_description {
-            @extend .container-editor__notes_description, .container-editor--dark__notes_title;
+            &--dark {
+                @extend .container-editor__notes_title--dark;
+            }
         }
     }
 }

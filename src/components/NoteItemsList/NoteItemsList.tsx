@@ -9,13 +9,13 @@ const NoteItemsList = ({
     removeNoteItem,
     selectNoteItem,
     activeNoteIdProp,
-    darkMode,
+    isDarkMode,
 }: {
     arrayOfNotes: Note[];
     activeNoteIdProp?: string;
     removeNoteItem: (id: string) => void;
     selectNoteItem: (note: Note) => void;
-    darkMode: boolean;
+    isDarkMode: boolean;
 }): React.ReactElement => {
     const [activeNoteId, setActiveNoteId] = useState<string>(
         arrayOfNotes.length > firstElement ? arrayOfNotes[firstElement].id : '',
@@ -44,7 +44,7 @@ const NoteItemsList = ({
                         note={note}
                         deleteNoteItem={deleteNoteItem}
                         isActive={note.id === activeNoteId}
-                        darkMode={darkMode}
+                        isDarkMode={isDarkMode}
                     />
                 </div>
             );

@@ -1,72 +1,69 @@
 .container-modal {
     position: relative;
-}
-
-.container-modal__block {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    max-width: 400px;
-    height: 300px;
-    background-color: black;
-    color: white;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    &:focus {
-        outline: none;
-    }
-    &--close {
-        width: 80%;
-        display: flex;
-        justify-content: flex-end;
-        &-img {
-            width: 30px;
-            cursor: pointer;
-        }
-    }
-    &--title {
-        font-size: 30px;
-    }
-    &--btns {
+    &__block {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-    }
-    &--btn {
-        font-family: 'Amatic SC', cursive;
-        font-weight: 700;
-        font-size: 25px;
-        width: 100px;
-        height: 40px;
+        max-width: 400px;
+        height: 300px;
+        background-color: black;
+        color: white;
         border-radius: 10px;
-        border: none;
-        cursor: pointer;
-        &-dark {
-            background-color: black;
-            color: white;
-            &:focus {
-                outline: none;
-            }
-            &:hover {
-                background-color: rgb(128, 128, 128);
-            }
-        }
-        &-light {
-            @extend .container-modal__block--btn-dark;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        &--dark {
             background-color: white;
             color: black;
+            transition: linear 0.2s;
+        }
+        &:focus {
+            outline: none;
+        }
+        &_img {
+            width: 80%;
+            display: flex;
+            justify-content: flex-end;
+            &--close {
+                width: 30px;
+                cursor: pointer;
+            }
+        }
+        &_title {
+            font-size: 30px;
+        }
+        &_btns {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+        &_btn {
+            font-family: 'Amatic SC', cursive;
+            font-weight: 700;
+            font-size: 25px;
+            width: 100px;
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            &--dark {
+                background-color: black;
+                color: white;
+                &:focus {
+                    outline: none;
+                }
+                &:hover {
+                    background-color: rgb(128, 128, 128);
+                }
+            }
+            &--light {
+                @extend .container-modal__block_btn--dark;
+                background-color: white;
+                color: black;
+            }
         }
     }
-}
-
-.container-modal__block--dark {
-    @extend .container-modal__block;
-    background-color: white;
-    color: black;
-    transition: linear 0.2s;
 }
