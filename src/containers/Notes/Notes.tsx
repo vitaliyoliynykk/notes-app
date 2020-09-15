@@ -8,6 +8,7 @@ import TextEditor from '../../components/TextEditor/TextEditor';
 
 import { FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import LogOut from '../../assets/logout.svg';
+import Plus from '../../assets/plus.svg';
 
 class Notes extends React.Component<{}, NotesState> {
     public static contextType = AuthContext;
@@ -88,12 +89,12 @@ class Notes extends React.Component<{}, NotesState> {
                         <img src={this.state.user.photoURL as string} alt="user" className="user-photo" />
                     )}
                     <img
-                        src={AddNote}
-                        alt="icon"
+                        src={Plus}
+                        alt="Add note"
                         className="notes__menu-img-add"
                         onClick={this.addNewNote.bind(this)}
                     />
-                    <img src={LogOut} alt="icon" className="notes__menu-img-exit" onClick={this.logOutFromNoteApp} />
+                    <img src={LogOut} alt="Log out" className="notes__menu-img-exit" onClick={this.logOutFromNoteApp} />
                 </div>
                 <div className="notes__list">
                     <NoteItemsList
