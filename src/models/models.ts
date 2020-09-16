@@ -20,4 +20,5 @@ export interface NotesState {
     activeNote: Note | null;
     notes: Note[];
     isDarkMode: boolean;
+    loading: boolean;
 }

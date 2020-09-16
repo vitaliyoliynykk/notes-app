@@ -32,9 +32,8 @@ const NoteItem = ({
         deleteNoteItem(id);
     };
 
-    const noteClass = classNames({
+    const noteClass = classNames('container-note', {
         'container-note--dark': isDarkMode,
-        'container-note': !isDarkMode,
         'container-note--dark--active': isDarkMode && isActive,
         'container-note--active': !isDarkMode && isActive,
     });

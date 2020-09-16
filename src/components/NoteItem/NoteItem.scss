@@ -2,29 +2,22 @@
     padding: 15px;
     background-color: white;
     color: black;
-    transition: linear 0.2s;
     cursor: pointer;
     &--dark {
-        padding: 15px;
-        transition: linear 0.2s;
-        cursor: pointer;
         background-color: black;
         color: white;
         &:hover {
             @extend .container-note--dark--active;
             .container-note__header_img {
                 opacity: 1;
-                transition: linear 0.2s;
             }
         }
         &--active {
-            transition: linear 0.2s;
-            background-color: white;
-            color: black;
+            background-color: white !important;
+            color: black !important;
         }
     }
     &--active {
-        transition: linear 0.2s;
         background-color: black;
         color: white;
     }
@@ -32,7 +25,6 @@
         @extend .container-note--active;
         .container-note__header_img {
             opacity: 1;
-            transition: linear 0.2s;
         }
     }
     &__header {
@@ -45,9 +37,7 @@
         }
         &_img {
             width: 25px;
-            cursor: pointer;
             opacity: 0;
-            transition: linear 0.2s;
         }
     }
     &__bottom {

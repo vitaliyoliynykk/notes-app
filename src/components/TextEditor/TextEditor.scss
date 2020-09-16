@@ -2,7 +2,6 @@
     padding: 15px;
     &--dark {
         background-color: black;
-        transition: linear 0.2s;
     }
     &__header {
         height: 50px;
@@ -24,7 +23,6 @@
         &--dark {
             background-color: white;
             color: black;
-            transition: linear 0.2s;
         }
     }
     &__img {
@@ -43,14 +41,12 @@
         }
         &--dark {
             background-color: white;
-            transition: linear 0.2s;
         }
     }
     &__notes {
         @extend .container-editor__img_block;
         margin-top: 15px;
         flex-direction: column;
-        transition: linear 0.2s;
         &_title {
             font-family: 'Amatic SC', cursive;
             border: none;
