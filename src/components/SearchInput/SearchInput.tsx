@@ -10,7 +10,7 @@ const SearchInput = ({ getSearchInputValue }: SearchInputValue): React.ReactElem
 
     return (
         <div className="container-search">
-            <img src={SearchIcon} alt="#" className="container-search__img" />
+            <img src={SearchIcon} alt="search icon" className="container-search__img" />
             <input
                 type="search"
                 placeholder="Search Notes"
