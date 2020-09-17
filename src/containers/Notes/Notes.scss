@@ -12,18 +12,32 @@
         justify-content: space-between;
         align-items: center;
         padding: 20px 0;
-        &-img-exit {
-            width: 40px;
-            cursor: pointer;
-        }
-        &-img-add {
-            @extend .notes__menu-img-exit;
+        &--dark {
+            background-color: white;
         }
     }
-
+    &__img {
+        padding: 5px;
+        width: 40px;
+        cursor: pointer;
+        border-radius: 10px;
+        &--dark {
+            background-color: black;
+        }
+    }
     &__list {
         width: 100%;
-        overflow: hidden;
+        overflow: scroll;
+        &--dark {
+            background-color: black;
+        }
+        &::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    }
+    &__editor--dark {
+        background-color: black;
     }
 }
 
@@ -31,4 +45,11 @@
     width: 50px;
     height: 50px;
     border-radius: 50px;
+}
+
+.loader-component {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

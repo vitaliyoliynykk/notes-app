@@ -1,5 +1,8 @@
 .container-editor {
     padding: 15px;
+    &--dark {
+        background-color: black;
+    }
     &__header {
         height: 50px;
         margin: 0 auto;
@@ -9,16 +12,22 @@
     }
     &__select {
         font-family: 'Amatic SC', cursive;
-        background-color: rgb(0, 0, 0);
-        color: rgb(255, 255, 255);
+        background-color: black;
+        color: white;
         border-radius: 10px;
         font-size: 25px;
         cursor: pointer;
         &:focus {
             outline: none;
         }
+        &--dark {
+            background-color: white;
+            color: black;
+        }
     }
     &__img {
+        padding: 5px;
+        border-radius: 10px;
         width: 40px;
         margin-right: 5px;
         cursor: pointer;
@@ -29,6 +38,9 @@
         }
         &_block {
             display: flex;
+        }
+        &--dark {
+            background-color: white;
         }
     }
     &__notes {
@@ -44,11 +56,18 @@
             &:focus {
                 outline: none;
             }
+            &--dark {
+                background-color: black;
+                color: white;
+            }
         }
         &_description {
             @extend .container-editor__notes_title;
             font-weight: normal;
             min-height: 500px;
+            &--dark {
+                @extend .container-editor__notes_title--dark;
+            }
         }
     }
 }
