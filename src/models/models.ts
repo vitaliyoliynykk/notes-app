@@ -9,6 +9,7 @@ export interface Note {
 
 export interface SearchInputValue {
     getSearchInputValue: (searchValue: string) => void;
+    isDarkMode: boolean;
 }
 
 export interface RemoveNoteItem {

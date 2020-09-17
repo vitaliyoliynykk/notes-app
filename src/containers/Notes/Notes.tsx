@@ -11,6 +11,7 @@ import LogOut from '../../assets/logout.svg';
 import DarkMode from '../../assets/moon.svg';
 import LightMode from '../../assets/sunlight.svg';
 import Loader from '../../components/Loader/Loader';
+import SearchInput from '../../components/SearchInput/SearchInput';
 
 class Notes extends React.Component<{}, NotesState> {
     public static contextType = AuthContext;
@@ -40,7 +41,13 @@ class Notes extends React.Component<{}, NotesState> {
             .then((snapshot) => {
                 if (snapshot.val()) {
                     const notes: Note[] = Object.values(snapshot.val());
-                    this.setState({ ...this.state, notes, activeNote: notes[FIRST_ELEMENT], loading: false });
+                    const sortedArrayByDate = notes.sort((a, b) => +new Date(a.date) - +new Date(b.date)).reverse();
+                    this.setState({
+                        ...this.state,
+                        notes: sortedArrayByDate,
+                        activeNote: notes[FIRST_ELEMENT],
+                        loading: false,
+                    });
                 } else {
                     const note = getDefaultNote();
                     this.setState({ ...this.state, notes: [note], activeNote: note, loading: true });
@@ -95,6 +102,18 @@ class Notes extends React.Component<{}, NotesState> {
         this.setState({ ...this.state, isDarkMode: true });
     }
 
+    private getSearchInputValue(input: string): void {
+        const sortedArray = this.state.notes.sort((a, b) => {
+            const c = -1;
+            const d = 1;
+            if (a.title.startsWith(input) && b.title.startsWith(input)) return a.title.localeCompare(b.title);
+            else if (a.title.startsWith(input)) return c;
+            else if (b.title.startsWith(input)) return d;
+            return a.title.localeCompare(b.title);
+        });
+        this.setState({ ...this.state, notes: sortedArray });
+    }
+
     public render(): React.ReactElement {
         return (
             <>
@@ -137,6 +156,10 @@ class Notes extends React.Component<{}, NotesState> {
                             />
                         </div>
                         <div className={this.state.isDarkMode ? 'notes__list notes__list--dark' : 'notes__list'}>
+                            <SearchInput
+                                getSearchInputValue={this.getSearchInputValue.bind(this)}
+                                isDarkMode={this.state.isDarkMode}
+                            />
                             <NoteItemsList
                                 arrayOfNotes={this.state.notes}
                                 removeNoteItem={this.removeNoteItem.bind(this)}
