@@ -45,6 +45,9 @@ class Notes extends React.Component<{}, NotesState> {
                     const note = getDefaultNote();
                     this.setState({ ...this.state, notes: [note], activeNote: note, loading: true });
                 }
+            })
+            .catch(() => {
+                this.setState({ ...this.state, loading: false });
             });
     }
 
@@ -96,7 +99,9 @@ class Notes extends React.Component<{}, NotesState> {
         return (
             <>
                 {this.state.loading ? (
-                    <Loader />
+                    <div className="loader-component">
+                        <Loader />
+                    </div>
                 ) : (
                     <div className="container-notes">
                         <div className={this.state.isDarkMode ? 'notes__menu notes__menu--dark' : 'notes__menu'}>
