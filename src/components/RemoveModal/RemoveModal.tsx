@@ -2,6 +2,7 @@ import React from 'react';
 import './RemoveModal.scss';
 import ReactModal from 'react-modal';
 import RemoveImg from '../../assets/remove.svg';
+import classNames from 'classnames';
 
 export const RemoveModal = ({
     closeModal,
@@ -20,9 +21,7 @@ export const RemoveModal = ({
                 isOpen={true}
                 onRequestClose={closeModal}
                 ariaHideApp={false}
-                className={
-                    isDarkMode ? 'container-modal__block container-modal__block--dark' : 'container-modal__block'
-                }
+                className={classNames('container-modal__block', { 'container-modal__block--dark': isDarkMode })}
             >
                 <div className="container-modal__block_img">
                     <img
