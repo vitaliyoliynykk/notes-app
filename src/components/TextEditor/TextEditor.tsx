@@ -6,6 +6,7 @@ import TextRight from '../../assets/textright.svg';
 import AddImg from '../../assets/img.svg';
 import AddList from '../../assets/list.svg';
 import { Note } from '../../models/models';
+import classNames from 'classnames';
 
 const TextEditor = ({
     noteItem,
@@ -50,14 +51,16 @@ const TextEditor = ({
     };
 
     return (
-        <div className={isDarkMode ? 'container-editor container-editor--dark' : 'container-editor'}>
+        <div
+            className={classNames('container-editor', {
+                'container-editor--dark': isDarkMode,
+            })}
+        >
             <div className="container-editor__header">
                 <select
-                    className={
-                        isDarkMode
-                            ? 'container-editor__select container-editor__select--dark'
-                            : 'container-editor__select'
-                    }
+                    className={classNames('container-editor__select', {
+                        'container-editor__select--dark': isDarkMode,
+                    })}
                     onChange={handleFontSize}
                 >
                     <option value="10">10px</option>
@@ -74,25 +77,25 @@ const TextEditor = ({
                     <img
                         src={TextLeft}
                         alt="text left icon"
-                        className={
-                            isDarkMode ? 'container-editor__img container-editor__img--dark' : 'container-editor__img'
-                        }
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                         onClick={(): void => handleAlignText('left')}
                     />
                     <img
                         src={TextCenter}
                         alt="text center icon"
-                        className={
-                            isDarkMode ? 'container-editor__img container-editor__img--dark' : 'container-editor__img'
-                        }
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                         onClick={(): void => handleAlignText('center')}
                     />
                     <img
                         src={TextRight}
                         alt="text right icon"
-                        className={
-                            isDarkMode ? 'container-editor__img container-editor__img--dark' : 'container-editor__img'
-                        }
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                         onClick={(): void => handleAlignText('right')}
                     />
                 </div>
@@ -100,17 +103,17 @@ const TextEditor = ({
                     <img
                         src={AddImg}
                         alt="add img icon"
-                        className={
-                            isDarkMode ? 'container-editor__img container-editor__img--dark' : 'container-editor__img'
-                        }
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                         onClick={(): void => setOnClickIcon(!onClickIcon)}
                     />
                     <img
                         src={AddList}
                         alt="add list icon"
-                        className={
-                            isDarkMode ? 'container-editor__img container-editor__img--dark' : 'container-editor__img'
-                        }
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                     />
                 </div>
             </div>
@@ -122,21 +125,17 @@ const TextEditor = ({
             ) : null}
             <div className="container-editor__notes">
                 <textarea
-                    className={
-                        isDarkMode
-                            ? 'container-editor__notes_title container-editor__notes_title--dark'
-                            : 'container-editor__notes_title'
-                    }
+                    className={classNames('container-editor__notes_title', {
+                        'container-editor__notes_title--dark': isDarkMode,
+                    })}
                     placeholder="Write the title..."
                     value={objNote.title}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void => handleTextArea(event, 'title')}
                 />
                 <textarea
-                    className={
-                        isDarkMode
-                            ? 'container-editor__notes_description container-editor__notes_description--dark'
-                            : 'container-editor__notes_description'
-                    }
+                    className={classNames('container-editor__notes_description', {
+                        'container-editor__notes_description--dark': isDarkMode,
+                    })}
                     placeholder="Write the desciption..."
                     value={objNote.description}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
