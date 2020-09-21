@@ -22,4 +22,5 @@ export interface NotesState {
     notes: Note[];
     isDarkMode: boolean;
     loading: boolean;
+    isOpenMobileLayout: boolean;
 }
