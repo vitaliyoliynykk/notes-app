@@ -60,10 +60,10 @@ class Notes extends React.Component<{}, NotesState> {
     }
 
     private updateNoteInLocalState(note: Note): Note[] {
+        note.date = Date.now();
         const stateNotes = this.state.notes;
         const indexToEdit = stateNotes.findIndex((stateNote) => stateNote.id === note.id);
         stateNotes[indexToEdit] = note;
-        note.date = Date.now();
         return stateNotes;
     }
 
@@ -76,13 +76,10 @@ class Notes extends React.Component<{}, NotesState> {
     private onNoteChange(note: Note): void {
         const updatedNotes = this.updateNoteInLocalState(note);
         const arraySortedByDate = updatedNotes.sort((a, b) => +b.date - +a.date);
-        console.log(arraySortedByDate);
-
         this.setState({
             ...this.state,
             notes: arraySortedByDate,
         });
-
         this.saveNoteToFirebase(note);
     }
 
