@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './NoteItemsList.scss';
 import NoteItem from '../NoteItem/NoteItem';
 import { Note } from '../../models/models';
 
@@ -10,11 +9,13 @@ const NoteItemsList = ({
     removeNoteItem,
     selectNoteItem,
     activeNoteIdProp,
+    isDarkMode,
 }: {
     arrayOfNotes: Note[];
     activeNoteIdProp?: string;
     removeNoteItem: (id: string) => void;
     selectNoteItem: (note: Note) => void;
+    isDarkMode: boolean;
 }): React.ReactElement => {
     const [activeNoteId, setActiveNoteId] = useState<string>(
         arrayOfNotes.length > firstElement ? arrayOfNotes[firstElement].id : '',
@@ -39,7 +40,12 @@ const NoteItemsList = ({
         return arrayOfNotes.map((note) => {
             return (
                 <div onClick={(): void => setActiveNote(note)} key={note.id}>
-                    <NoteItem note={note} deleteNoteItem={deleteNoteItem} isActive={note.id === activeNoteId} />
+                    <NoteItem
+                        note={note}
+                        deleteNoteItem={deleteNoteItem}
+                        isActive={note.id === activeNoteId}
+                        isDarkMode={isDarkMode}
+                    />
                 </div>
             );
         });

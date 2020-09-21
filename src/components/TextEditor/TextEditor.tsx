@@ -3,12 +3,20 @@ import './TextEditor.scss';
 import TextLeft from '../../assets/textleft.svg';
 import TextCenter from '../../assets/textcenter.svg';
 import TextRight from '../../assets/textright.svg';
-import AddFile from '../../assets/addfile.svg';
 import AddImg from '../../assets/img.svg';
 import AddList from '../../assets/list.svg';
 import { Note } from '../../models/models';
+import classNames from 'classnames';
 
-const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: Note) => void }): React.ReactElement => {
+const TextEditor = ({
+    noteItem,
+    onChange,
+    isDarkMode,
+}: {
+    noteItem: Note;
+    onChange: (note: Note) => void;
+    isDarkMode: boolean;
+}): React.ReactElement => {
     const [onClickIcon, setOnClickIcon] = useState(false);
     const [uploadedImg, setUploadedImg] = useState('');
     const [objNote, setObjNote] = useState<Note>(noteItem);
@@ -43,9 +51,18 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
     };
 
     return (
-        <div className="container-editor">
+        <div
+            className={classNames('container-editor', {
+                'container-editor--dark': isDarkMode,
+            })}
+        >
             <div className="container-editor__header">
-                <select className="container-editor__select" onChange={handleFontSize}>
+                <select
+                    className={classNames('container-editor__select', {
+                        'container-editor__select--dark': isDarkMode,
+                    })}
+                    onChange={handleFontSize}
+                >
                     <option value="10">10px</option>
                     <option value="14">14px</option>
                     <option value="18">18px</option>
@@ -59,32 +76,45 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
                 <div className="container-editor__img_block">
                     <img
                         src={TextLeft}
-                        alt="icon"
-                        className="container-editor__img"
+                        alt="text left icon"
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                         onClick={(): void => handleAlignText('left')}
                     />
                     <img
                         src={TextCenter}
-                        alt="icon"
-                        className="container-editor__img"
+                        alt="text center icon"
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                         onClick={(): void => handleAlignText('center')}
                     />
                     <img
                         src={TextRight}
-                        alt="icon"
-                        className="container-editor__img"
+                        alt="text right icon"
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                         onClick={(): void => handleAlignText('right')}
                     />
                 </div>
                 <div className="container-editor__img_block">
-                    <img src={AddFile} alt="icon" className="container-editor__img" />
                     <img
                         src={AddImg}
-                        alt="icon"
-                        className="container-editor__img"
+                        alt="add img icon"
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                         onClick={(): void => setOnClickIcon(!onClickIcon)}
                     />
-                    <img src={AddList} alt="icon" className="container-editor__img" />
+                    <img
+                        src={AddList}
+                        alt="add list icon"
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
+                    />
                 </div>
             </div>
             {onClickIcon ? (
@@ -95,22 +125,27 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
             ) : null}
             <div className="container-editor__notes">
                 <textarea
-                    className="container-editor__notes_title"
+                    className={classNames('container-editor__notes_title', {
+                        'container-editor__notes_title--dark': isDarkMode,
+                    })}
                     placeholder="Write the title..."
                     value={objNote.title}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void => handleTextArea(event, 'title')}
                 />
                 <textarea
-                    className="container-editor__notes_description"
+                    className={classNames('container-editor__notes_description', {
+                        'container-editor__notes_description--dark': isDarkMode,
+                    })}
                     placeholder="Write the desciption..."
                     value={objNote.description}
-                    contentEditable
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
                         handleTextArea(event, 'description')
                     }
                     style={{ fontSize: objNote.fontSize, textAlign: objNote.textAlign } as React.CSSProperties}
                 />
-                {uploadedImg ? <img src={uploadedImg} alt="#" className="container-editor__img_uploaded" /> : null}
+                {uploadedImg ? (
+                    <img src={uploadedImg} alt="uploaded img" className="container-editor__img_uploaded" />
+                ) : null}
             </div>
         </div>
     );
