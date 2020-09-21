@@ -590,6 +590,7 @@
 [0918/145807.701:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0918/145807.701:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0918/145807.702:ERROR:crash_report_database_win.cc(469)] failed to stat report
+<<<<<<< HEAD
 [0918/151307.707:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0918/151307.707:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0918/151307.707:ERROR:crash_report_database_win.cc(469)] failed to stat report
@@ -650,3 +651,5 @@
 [0918/175807.874:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0918/175807.874:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0918/175807.875:ERROR:crash_report_database_win.cc(469)] failed to stat report
+=======
+>>>>>>> edea62ea2a09c4b5d516ec731ac5826739432ddf
