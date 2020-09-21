@@ -6,7 +6,7 @@ import './Notes.scss';
 import NoteItemsList from '../../components/NoteItemsList/NoteItemsList';
 import TextEditor from '../../components/TextEditor/TextEditor';
 import AddNote from '../../assets/addnote.svg';
-import { FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
+import { emptyValue, FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import LogOut from '../../assets/logout.svg';
 import DarkMode from '../../assets/moon.svg';
 import LightMode from '../../assets/sunlight.svg';
@@ -110,15 +110,13 @@ class Notes extends React.Component<{}, NotesState> {
     }
 
     public filterArrayBySearchValue = (input: string): Note[] => {
-        const arrayFilteredBySearchValue = this.state.notes.filter((note) => {
-            return note.title.toLowerCase().includes(input.toLowerCase()) ? true : false;
-        });
-
+        const arrayFilteredBySearchValue = this.state.notes.filter((note) =>
+            note.title.toLowerCase().includes(input.toLowerCase()),
+        );
         return arrayFilteredBySearchValue;
     };
 
     public render(): React.ReactElement {
-        const emptyValue = 0;
         return (
             <>
                 {this.state.loading ? (
