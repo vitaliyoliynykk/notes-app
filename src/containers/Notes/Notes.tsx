@@ -13,6 +13,7 @@ import LightMode from '../../assets/sunlight.svg';
 import Loader from '../../components/Loader/Loader';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import classNames from 'classnames';
+
 class Notes extends React.Component<{}, NotesState> {
     public static contextType = AuthContext;
     private database: firebase.database.Database;
