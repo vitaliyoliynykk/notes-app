@@ -27,6 +27,7 @@ class Notes extends React.Component<{}, NotesState> {
             notes: [],
             isDarkMode: false,
             loading: true,
+            isOpenMobileLayout: false,
             searchValue: null,
             searchNotes: [],
         };
@@ -89,6 +90,7 @@ class Notes extends React.Component<{}, NotesState> {
         this.setState({
             ...this.state,
             activeNote: note,
+            isOpenMobileLayout: true,
         });
     }
 
@@ -110,6 +112,10 @@ class Notes extends React.Component<{}, NotesState> {
         this.setState({ ...this.state, isDarkMode: true });
     }
 
+    private openMobileLayout(): void {
+        this.setState({ ...this.state, isOpenMobileLayout: true });
+    }
+
     private getSearchInputValue(input: string): void {
         const filteredArray = this.filterArrayBySearchValue(input);
         this.setState({ ...this.state, searchNotes: filteredArray, searchValue: input });
@@ -123,6 +129,11 @@ class Notes extends React.Component<{}, NotesState> {
     };
 
     public render(): React.ReactElement {
+        const noteListClass = classNames('notes__list', {
+            'notes__list--dark': this.state.isDarkMode,
+            'notes__list--hide': this.state.isOpenMobileLayout,
+        });
+
         return (
             <>
                 {this.state.loading ? (
@@ -163,10 +174,23 @@ class Notes extends React.Component<{}, NotesState> {
                                 onClick={this.logOutFromNoteApp}
                             />
                         </div>
+                        {this.state.isOpenMobileLayout ? (
+                            <button
+                                className={classNames('notes__btn', { 'notes__btn--dark': this.state.isDarkMode })}
+                                onClick={(): void => this.setState({ ...this.state, isOpenMobileLayout: false })}
+                            >
+                                Show
+                            </button>
+                        ) : (
+                            <button
+                                className={classNames('notes__btn', { 'notes__btn--dark': this.state.isDarkMode })}
+                                onClick={this.openMobileLayout.bind(this)}
+                            >
+                                Hide
+                            </button>
+                        )}
                         <div
-                            className={classNames('notes__list', {
-                                'notes__list--dark': this.state.isDarkMode,
-                            })}
+                            className={noteListClass}
                         >
                             <SearchInput
                                 getSearchInputValue={this.getSearchInputValue.bind(this)}
