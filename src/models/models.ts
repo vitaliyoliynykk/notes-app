@@ -23,6 +23,6 @@ export interface NotesState {
     searchNotes: Note[];
     isDarkMode: boolean;
     loading: boolean;
-    isOpenMobileLayout: boolean;
+    isOpenNotesList: boolean;
     searchValue: string | null;
 }

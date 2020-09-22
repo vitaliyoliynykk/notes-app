@@ -2,7 +2,7 @@
     padding: 15px;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     &__img {
         margin-right: 10px;
     }
@@ -10,7 +10,7 @@
         width: 100%;
         border: none;
         font-family: 'Amatic SC', cursive;
-        font-size: 20px;
+        font-size: 25px;
         text-align: start;
         &:focus {
             outline: none;

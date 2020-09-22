@@ -27,7 +27,7 @@ class Notes extends React.Component<{}, NotesState> {
             notes: [],
             isDarkMode: false,
             loading: true,
-            isOpenMobileLayout: false,
+            isOpenNotesList: false,
             searchValue: null,
             searchNotes: [],
         };
@@ -90,7 +90,7 @@ class Notes extends React.Component<{}, NotesState> {
         this.setState({
             ...this.state,
             activeNote: note,
-            isOpenMobileLayout: true,
+            isOpenNotesList: true,
         });
     }
 
@@ -113,7 +113,7 @@ class Notes extends React.Component<{}, NotesState> {
     }
 
     private openMobileLayout(): void {
-        this.setState({ ...this.state, isOpenMobileLayout: true });
+        this.setState({ ...this.state, isOpenNotesList: true });
     }
 
     private getSearchInputValue(input: string): void {
@@ -131,7 +131,7 @@ class Notes extends React.Component<{}, NotesState> {
     public render(): React.ReactElement {
         const noteListClass = classNames('notes__list', {
             'notes__list--dark': this.state.isDarkMode,
-            'notes__list--hide': this.state.isOpenMobileLayout,
+            'notes__list--hide': this.state.isOpenNotesList,
         });
 
         return (
@@ -174,10 +174,10 @@ class Notes extends React.Component<{}, NotesState> {
                                 onClick={this.logOutFromNoteApp}
                             />
                         </div>
-                        {this.state.isOpenMobileLayout ? (
+                        {this.state.isOpenNotesList ? (
                             <button
                                 className={classNames('notes__btn', { 'notes__btn--dark': this.state.isDarkMode })}
-                                onClick={(): void => this.setState({ ...this.state, isOpenMobileLayout: false })}
+                                onClick={(): void => this.setState({ ...this.state, isOpenNotesList: false })}
                             >
                                 Show
                             </button>
@@ -189,9 +189,7 @@ class Notes extends React.Component<{}, NotesState> {
                                 Hide
                             </button>
                         )}
-                        <div
-                            className={noteListClass}
-                        >
+                        <div className={noteListClass}>
                             <SearchInput
                                 getSearchInputValue={this.getSearchInputValue.bind(this)}
                                 isDarkMode={this.state.isDarkMode}

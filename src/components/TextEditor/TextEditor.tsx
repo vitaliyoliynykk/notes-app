@@ -61,7 +61,6 @@ const TextEditor = ({
                         'container-editor__select--dark': isDarkMode,
                     })}
                     onChange={handleFontSize}
-                    defaultValue="22"
                 >
                     <option value="10">10px</option>
                     <option value="14">14px</option>
