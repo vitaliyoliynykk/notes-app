@@ -1,7 +1,7 @@
 export interface Note {
     title: string;
     description: string;
-    date: string;
+    date: number;
     id: string;
     fontSize: string;
     textAlign: 'left' | 'center' | 'right';
