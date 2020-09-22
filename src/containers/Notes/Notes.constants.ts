@@ -4,9 +4,9 @@ import { Note } from '../../models/models';
 export const getDefaultNote = (): Note => ({
     title: 'This is your note...',
     description: 'Write something...',
-    date: new Date().toDateString(),
+    date: Date.now(),
     id: uuidv4(),
-    fontSize: '20px',
+    fontSize: '22px',
     textAlign: 'left',
 });
 

@@ -64,3 +64,17 @@
         }
     }
 }
+
+@media (max-width: 800px) {
+    .container-editor__notes_description {
+        height: unset;
+    }
+}
+
+@media (max-width: 425px) {
+    .container-editor__header {
+        height: unset;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

@@ -1,7 +1,7 @@
 export interface Note {
     title: string;
     description: string;
-    date: string;
+    date: number;
     id: string;
     fontSize: string;
     textAlign: 'left' | 'center' | 'right';
@@ -23,5 +23,6 @@ export interface NotesState {
     searchNotes: Note[];
     isDarkMode: boolean;
     loading: boolean;
+    isOpenMobileLayout: boolean;
     searchValue: string | null;
 }

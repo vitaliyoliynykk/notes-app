@@ -38,10 +38,14 @@ const NoteItem = ({
         'container-note--active': !isDarkMode && isActive,
     });
 
+    const formatDate = (note: Note): string => {
+        return new Date(note.date).toLocaleString();
+    };
+
     return (
         <div className={noteClass}>
             <div className="container-note__header">
-                <div className="container-note__header_date">{note.date}</div>
+                <div className="container-note__header_date">{formatDate(note)}</div>
                 <img src={RemoveImg} alt="remove icon" className="container-note__header_img" onClick={openModal} />
             </div>
             <div className="container-note__bottom">
