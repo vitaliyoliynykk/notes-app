@@ -185,9 +185,7 @@ class Notes extends React.Component<{}, NotesState> {
                             </button>
                         )}
                         <div
-                            className={classNames('notes__list', {
-                                'notes__list--dark': this.state.isDarkMode,
-                            })}
+                            className={noteListClass}
                         >
                             <SearchInput
                                 getSearchInputValue={this.getSearchInputValue.bind(this)}
