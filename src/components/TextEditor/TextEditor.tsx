@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './TextEditor.scss';
-import TextLeft from '../../assets/textleft.svg';
-import TextCenter from '../../assets/textcenter.svg';
-import TextRight from '../../assets/textright.svg';
-import AddImg from '../../assets/img.svg';
-import AddList from '../../assets/list.svg';
+import { ReactComponent as TextLeft } from '../../assets/textleft.svg';
+import { ReactComponent as TextCenter } from '../../assets/textcenter.svg';
+import { ReactComponent as TextRight } from '../../assets/textright.svg';
+// import { ReactComponent as AddImg } from '../../assets/img.svg';
 import { Note } from '../../models/models';
 import classNames from 'classnames';
 
@@ -17,8 +16,8 @@ const TextEditor = ({
     onChange: (note: Note) => void;
     isDarkMode: boolean;
 }): React.ReactElement => {
-    const [onClickIcon, setOnClickIcon] = useState(false);
-    const [uploadedImg, setUploadedImg] = useState('');
+    // const [onClickIcon, setOnClickIcon] = useState(false);
+    // const [uploadedImg, setUploadedImg] = useState('');
     const [objNote, setObjNote] = useState<Note>(noteItem);
 
     useEffect(() => {
@@ -27,10 +26,10 @@ const TextEditor = ({
         }
     }, [noteItem]);
 
-    const uploadedImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const files: FileList | null = event.currentTarget.files;
-        if (files) Array.from(files).map((file: { name: string }) => setUploadedImg(URL.createObjectURL(file)));
-    };
+    // const uploadedImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    //     const files: FileList | null = event.currentTarget.files;
+    //     if (files) Array.from(files).map((file: { name: string }) => setUploadedImg(URL.createObjectURL(file)));
+    // };
 
     const handleFontSize = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         const note = { ...objNote, fontSize: `${event.target.value}px` };
@@ -74,32 +73,23 @@ const TextEditor = ({
                     <option value="42">42px</option>
                 </select>
                 <div className="container-editor__img_block">
-                    <img
-                        src={TextLeft}
-                        alt="text left icon"
-                        className={classNames('container-editor__img', {
-                            'container-editor__img--dark': isDarkMode,
-                        })}
+                    <TextLeft
+                        style={isDarkMode ? { fill: 'white' } : { fill: 'black' }}
+                        className="container-editor__img"
                         onClick={(): void => handleAlignText('left')}
                     />
-                    <img
-                        src={TextCenter}
-                        alt="text center icon"
-                        className={classNames('container-editor__img', {
-                            'container-editor__img--dark': isDarkMode,
-                        })}
+                    <TextCenter
+                        style={isDarkMode ? { fill: 'white' } : { fill: 'black' }}
+                        className="container-editor__img"
                         onClick={(): void => handleAlignText('center')}
                     />
-                    <img
-                        src={TextRight}
-                        alt="text right icon"
-                        className={classNames('container-editor__img', {
-                            'container-editor__img--dark': isDarkMode,
-                        })}
+                    <TextRight
+                        style={isDarkMode ? { fill: 'white' } : { fill: 'black' }}
+                        className="container-editor__img"
                         onClick={(): void => handleAlignText('right')}
                     />
                 </div>
-                <div className="container-editor__img_block">
+                {/* <div className="container-editor__img_block">
                     <img
                         src={AddImg}
                         alt="add img icon"
@@ -108,21 +98,14 @@ const TextEditor = ({
                         })}
                         onClick={(): void => setOnClickIcon(!onClickIcon)}
                     />
-                    <img
-                        src={AddList}
-                        alt="add list icon"
-                        className={classNames('container-editor__img', {
-                            'container-editor__img--dark': isDarkMode,
-                        })}
-                    />
-                </div>
+                </div> */}
             </div>
-            {onClickIcon ? (
+            {/* {onClickIcon ? (
                 <input
                     type="file"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>): void => uploadedImage(event)}
                 />
-            ) : null}
+            ) : null} */}
             <div className="container-editor__notes">
                 <textarea
                     className={classNames('container-editor__notes_title', {
@@ -143,9 +126,9 @@ const TextEditor = ({
                     }
                     style={{ fontSize: objNote.fontSize, textAlign: objNote.textAlign } as React.CSSProperties}
                 />
-                {uploadedImg ? (
+                {/* {uploadedImg ? (
                     <img src={uploadedImg} alt="uploaded img" className="container-editor__img_uploaded" />
-                ) : null}
+                ) : null} */}
             </div>
         </div>
     );

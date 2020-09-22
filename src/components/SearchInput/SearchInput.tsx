@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './SearchInput.scss';
-import SearchIcon from '../../assets/search.svg';
+import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 import { SearchInputValue } from '../../models/models';
 import classNames from 'classnames';
 
@@ -14,11 +14,7 @@ const SearchInput = ({ getSearchInputValue, isDarkMode }: SearchInputValue): Rea
 
     return (
         <div className="container-search">
-            <img
-                src={SearchIcon}
-                alt="search icon"
-                className={classNames('container-search__img', { 'container-search__img--dark': isDarkMode })}
-            />
+            <SearchIcon className="container-search__img" style={isDarkMode ? { fill: 'white' } : { fill: 'black' }} />
             <input
                 type="search"
                 placeholder="Search Notes"

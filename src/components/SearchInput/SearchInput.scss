@@ -4,19 +4,7 @@
     justify-content: flex-start;
     align-items: center;
     &__img {
-        width: 20px;
-        padding: 5px;
-        border-radius: 10px;
-        &--dark {
-            background-color: white;
-        }
-        &_close {
-            width: 10px;
-            cursor: pointer;
-            &--dark {
-                background-color: white;
-            }
-        }
+        margin-right: 10px;
     }
     &__input {
         width: 100%;
