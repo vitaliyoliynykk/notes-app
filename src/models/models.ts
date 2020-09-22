@@ -20,6 +20,8 @@ export interface NotesState {
     user: firebase.User | null;
     activeNote: Note | null;
     notes: Note[];
+    searchNotes: Note[];
     isDarkMode: boolean;
     loading: boolean;
+    searchValue: string | null;
 }

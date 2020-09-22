@@ -1,16 +1,17 @@
 .container-search {
     padding: 15px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     &__img {
         margin-right: 10px;
     }
     &__input {
-        height: 40px;
+        width: 100%;
         border: none;
         font-family: 'Amatic SC', cursive;
-        font-size: 25px;
+        font-size: 20px;
+        text-align: start;
         &:focus {
             outline: none;
         }
@@ -20,10 +21,6 @@
         }
         &::-webkit-search-cancel-button {
             cursor: pointer;
-            -webkit-appearance: none;
-            height: 20px;
-            width: 20px;
-            background-color: black;
         }
     }
 }
