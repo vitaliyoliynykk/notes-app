@@ -9,7 +9,7 @@ import { ReactComponent as AddNote } from '../../assets/addnote.svg';
 import { ReactComponent as LogOut } from '../../assets/logout.svg';
 import { ReactComponent as DarkMode } from '../../assets/moon.svg';
 import { ReactComponent as LightMode } from '../../assets/sunlight.svg';
-import { FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
+import { emptyValue, FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import Loader from '../../components/Loader/Loader';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import classNames from 'classnames';
