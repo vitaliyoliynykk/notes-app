@@ -3,18 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 2px solid black;
-    &--dark {
-        border-bottom: 2px solid white;
-    }
     &__img {
-        width: 40px;
-        padding: 5px;
-        border-radius: 10px;
         margin-right: 10px;
-        &--dark {
-            background-color: white;
-        }
     }
     &__input {
         height: 40px;
