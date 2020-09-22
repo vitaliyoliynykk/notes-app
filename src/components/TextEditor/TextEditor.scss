@@ -4,9 +4,8 @@
         background-color: black;
     }
     &__header {
-        height: 50px;
         margin: 0 auto;
-        max-width: 350px;
+        max-width: 250px;
         display: flex;
         justify-content: space-between;
     }
@@ -26,9 +25,6 @@
         }
     }
     &__img {
-        padding: 5px;
-        border-radius: 10px;
-        width: 40px;
         margin-right: 5px;
         cursor: pointer;
         &_uploaded {
@@ -38,9 +34,6 @@
         }
         &_block {
             display: flex;
-        }
-        &--dark {
-            background-color: white;
         }
     }
     &__notes {

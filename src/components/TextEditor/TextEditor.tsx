@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './TextEditor.scss';
-import TextLeft from '../../assets/textleft.svg';
-import TextCenter from '../../assets/textcenter.svg';
-import TextRight from '../../assets/textright.svg';
-// import AddImg from '../../assets/img.svg';
+import { ReactComponent as TextLeft } from '../../assets/textleft.svg';
+import { ReactComponent as TextCenter } from '../../assets/textcenter.svg';
+import { ReactComponent as TextRight } from '../../assets/textright.svg';
+// import { ReactComponent as AddImg } from '../../assets/img.svg';
 import { Note } from '../../models/models';
 import classNames from 'classnames';
 
@@ -16,7 +16,7 @@ const TextEditor = ({
     onChange: (note: Note) => void;
     isDarkMode: boolean;
 }): React.ReactElement => {
-//     const [onClickIcon, setOnClickIcon] = useState(false);
+    // const [onClickIcon, setOnClickIcon] = useState(false);
     // const [uploadedImg, setUploadedImg] = useState('');
     const [objNote, setObjNote] = useState<Note>(noteItem);
 
@@ -74,32 +74,23 @@ const TextEditor = ({
                     <option value="42">42px</option>
                 </select>
                 <div className="container-editor__img_block">
-                    <img
-                        src={TextLeft}
-                        alt="text left icon"
-                        className={classNames('container-editor__img', {
-                            'container-editor__img--dark': isDarkMode,
-                        })}
+                    <TextLeft
+                        style={isDarkMode ? { fill: 'white' } : { fill: 'black' }}
+                        className="container-editor__img"
                         onClick={(): void => handleAlignText('left')}
                     />
-                    <img
-                        src={TextCenter}
-                        alt="text center icon"
-                        className={classNames('container-editor__img', {
-                            'container-editor__img--dark': isDarkMode,
-                        })}
+                    <TextCenter
+                        style={isDarkMode ? { fill: 'white' } : { fill: 'black' }}
+                        className="container-editor__img"
                         onClick={(): void => handleAlignText('center')}
                     />
-                    <img
-                        src={TextRight}
-                        alt="text right icon"
-                        className={classNames('container-editor__img', {
-                            'container-editor__img--dark': isDarkMode,
-                        })}
+                    <TextRight
+                        style={isDarkMode ? { fill: 'white' } : { fill: 'black' }}
+                        className="container-editor__img"
                         onClick={(): void => handleAlignText('right')}
                     />
                 </div>
-<!--                 <div className="container-editor__img_block">
+                {/* <div className="container-editor__img_block">
                     <img
                         src={AddImg}
                         alt="add img icon"
@@ -107,7 +98,9 @@ const TextEditor = ({
                             'container-editor__img--dark': isDarkMode,
                         })}
                         onClick={(): void => setOnClickIcon(!onClickIcon)}
-                    /> -->
+                    />
+                </div> */}
+            </div>
             {/* {onClickIcon ? (
                 <input
                     type="file"
