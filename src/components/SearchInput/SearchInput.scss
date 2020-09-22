@@ -2,25 +2,16 @@
     padding: 15px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid black;
-    &--dark {
-        border-bottom: 2px solid white;
-    }
+    align-items: flex-start;
     &__img {
-        width: 40px;
-        padding: 5px;
-        border-radius: 10px;
         margin-right: 10px;
-        &--dark {
-            background-color: white;
-        }
     }
     &__input {
-        height: 40px;
+        width: 100%;
         border: none;
         font-family: 'Amatic SC', cursive;
-        font-size: 25px;
+        font-size: 20px;
+        text-align: start;
         &:focus {
             outline: none;
         }
@@ -30,10 +21,6 @@
         }
         &::-webkit-search-cancel-button {
             cursor: pointer;
-            -webkit-appearance: none;
-            height: 20px;
-            width: 20px;
-            background-color: black;
         }
     }
 }

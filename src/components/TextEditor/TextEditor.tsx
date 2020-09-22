@@ -3,8 +3,7 @@ import './TextEditor.scss';
 import TextLeft from '../../assets/textleft.svg';
 import TextCenter from '../../assets/textcenter.svg';
 import TextRight from '../../assets/textright.svg';
-import AddImg from '../../assets/img.svg';
-// import AddList from '../../assets/list.svg';
+// import AddImg from '../../assets/img.svg';
 import { Note } from '../../models/models';
 import classNames from 'classnames';
 
@@ -17,7 +16,7 @@ const TextEditor = ({
     onChange: (note: Note) => void;
     isDarkMode: boolean;
 }): React.ReactElement => {
-    const [onClickIcon, setOnClickIcon] = useState(false);
+//     const [onClickIcon, setOnClickIcon] = useState(false);
     // const [uploadedImg, setUploadedImg] = useState('');
     const [objNote, setObjNote] = useState<Note>(noteItem);
 
@@ -100,7 +99,7 @@ const TextEditor = ({
                         onClick={(): void => handleAlignText('right')}
                     />
                 </div>
-                <div className="container-editor__img_block">
+<!--                 <div className="container-editor__img_block">
                     <img
                         src={AddImg}
                         alt="add img icon"
@@ -108,16 +107,7 @@ const TextEditor = ({
                             'container-editor__img--dark': isDarkMode,
                         })}
                         onClick={(): void => setOnClickIcon(!onClickIcon)}
-                    />
-                    {/* <img
-                        src={AddList}
-                        alt="add list icon"
-                        className={classNames('container-editor__img', {
-                            'container-editor__img--dark': isDarkMode,
-                        })}
-                    /> */}
-                </div>
-            </div>
+                    /> -->
             {/* {onClickIcon ? (
                 <input
                     type="file"

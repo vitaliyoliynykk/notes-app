@@ -11,3 +11,5 @@ export const getDefaultNote = (): Note => ({
 });
 
 export const FIRST_ELEMENT = 0;
+
+export const emptyValue = 0;
