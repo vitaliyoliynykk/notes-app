@@ -2,17 +2,25 @@
     padding: 15px;
     display: flex;
     justify-content: center;
-    border-bottom: 2px solid rgb(0, 0, 0);
+    align-items: center;
     &__img {
-        width: 40px;
+        margin-right: 10px;
     }
     &__input {
-        height: 40px;
+        width: 100%;
         border: none;
         font-family: 'Amatic SC', cursive;
         font-size: 25px;
+        text-align: start;
         &:focus {
             outline: none;
+        }
+        &--dark {
+            background-color: black;
+            color: white;
+        }
+        &::-webkit-search-cancel-button {
+            cursor: pointer;
         }
     }
 }

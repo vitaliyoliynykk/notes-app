@@ -1,25 +1,30 @@
 .container-editor {
     padding: 15px;
+    &--dark {
+        background-color: black;
+    }
     &__header {
-        height: 50px;
         margin: 0 auto;
-        max-width: 350px;
+        max-width: 250px;
         display: flex;
         justify-content: space-between;
     }
     &__select {
         font-family: 'Amatic SC', cursive;
-        background-color: rgb(0, 0, 0);
-        color: rgb(255, 255, 255);
+        background-color: black;
+        color: white;
         border-radius: 10px;
         font-size: 25px;
         cursor: pointer;
         &:focus {
             outline: none;
         }
+        &--dark {
+            background-color: white;
+            color: black;
+        }
     }
     &__img {
-        width: 40px;
         margin-right: 5px;
         cursor: pointer;
         &_uploaded {
@@ -44,11 +49,32 @@
             &:focus {
                 outline: none;
             }
+            &--dark {
+                background-color: black;
+                color: white;
+            }
         }
         &_description {
             @extend .container-editor__notes_title;
             font-weight: normal;
             min-height: 500px;
+            &--dark {
+                @extend .container-editor__notes_title--dark;
+            }
         }
+    }
+}
+
+@media (max-width: 800px) {
+    .container-editor__notes_description {
+        height: unset;
+    }
+}
+
+@media (max-width: 425px) {
+    .container-editor__header {
+        height: unset;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }

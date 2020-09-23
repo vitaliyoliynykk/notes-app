@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './TextEditor.scss';
-import TextLeft from '../../assets/textleft.svg';
-import TextCenter from '../../assets/textcenter.svg';
-import TextRight from '../../assets/textright.svg';
-import AddFile from '../../assets/addfile.svg';
-import AddImg from '../../assets/img.svg';
-import AddList from '../../assets/list.svg';
+import { ReactComponent as TextLeft } from '../../assets/textleft.svg';
+import { ReactComponent as TextCenter } from '../../assets/textcenter.svg';
+import { ReactComponent as TextRight } from '../../assets/textright.svg';
+// import { ReactComponent as AddImg } from '../../assets/img.svg';
 import { Note } from '../../models/models';
+import classNames from 'classnames';
 
-const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: Note) => void }): React.ReactElement => {
-    const [onClickIcon, setOnClickIcon] = useState(false);
-    const [uploadedImg, setUploadedImg] = useState('');
+const TextEditor = ({
+    noteItem,
+    onChange,
+    isDarkMode,
+}: {
+    noteItem: Note;
+    onChange: (note: Note) => void;
+    isDarkMode: boolean;
+}): React.ReactElement => {
+    // const [onClickIcon, setOnClickIcon] = useState(false);
+    // const [uploadedImg, setUploadedImg] = useState('');
     const [objNote, setObjNote] = useState<Note>(noteItem);
 
     useEffect(() => {
@@ -19,10 +26,10 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
         }
     }, [noteItem]);
 
-    const uploadedImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const files: FileList | null = event.currentTarget.files;
-        if (files) Array.from(files).map((file: { name: string }) => setUploadedImg(URL.createObjectURL(file)));
-    };
+    // const uploadedImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    //     const files: FileList | null = event.currentTarget.files;
+    //     if (files) Array.from(files).map((file: { name: string }) => setUploadedImg(URL.createObjectURL(file)));
+    // };
 
     const handleFontSize = (event: React.ChangeEvent<HTMLSelectElement>): void => {
         const note = { ...objNote, fontSize: `${event.target.value}px` };
@@ -43,9 +50,18 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
     };
 
     return (
-        <div className="container-editor">
+        <div
+            className={classNames('container-editor', {
+                'container-editor--dark': isDarkMode,
+            })}
+        >
             <div className="container-editor__header">
-                <select className="container-editor__select" onChange={handleFontSize}>
+                <select
+                    className={classNames('container-editor__select', {
+                        'container-editor__select--dark': isDarkMode,
+                    })}
+                    onChange={handleFontSize}
+                >
                     <option value="10">10px</option>
                     <option value="14">14px</option>
                     <option value="18">18px</option>
@@ -57,60 +73,62 @@ const TextEditor = ({ noteItem, onChange }: { noteItem: Note; onChange: (note: N
                     <option value="42">42px</option>
                 </select>
                 <div className="container-editor__img_block">
-                    <img
-                        src={TextLeft}
-                        alt="icon"
+                    <TextLeft
+                        style={isDarkMode ? { fill: 'white' } : { fill: 'black' }}
                         className="container-editor__img"
                         onClick={(): void => handleAlignText('left')}
                     />
-                    <img
-                        src={TextCenter}
-                        alt="icon"
+                    <TextCenter
+                        style={isDarkMode ? { fill: 'white' } : { fill: 'black' }}
                         className="container-editor__img"
                         onClick={(): void => handleAlignText('center')}
                     />
-                    <img
-                        src={TextRight}
-                        alt="icon"
+                    <TextRight
+                        style={isDarkMode ? { fill: 'white' } : { fill: 'black' }}
                         className="container-editor__img"
                         onClick={(): void => handleAlignText('right')}
                     />
                 </div>
-                <div className="container-editor__img_block">
-                    <img src={AddFile} alt="icon" className="container-editor__img" />
+                {/* <div className="container-editor__img_block">
                     <img
                         src={AddImg}
-                        alt="icon"
-                        className="container-editor__img"
+                        alt="add img icon"
+                        className={classNames('container-editor__img', {
+                            'container-editor__img--dark': isDarkMode,
+                        })}
                         onClick={(): void => setOnClickIcon(!onClickIcon)}
                     />
-                    <img src={AddList} alt="icon" className="container-editor__img" />
-                </div>
+                </div> */}
             </div>
-            {onClickIcon ? (
+            {/* {onClickIcon ? (
                 <input
                     type="file"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>): void => uploadedImage(event)}
                 />
-            ) : null}
+            ) : null} */}
             <div className="container-editor__notes">
                 <textarea
-                    className="container-editor__notes_title"
+                    className={classNames('container-editor__notes_title', {
+                        'container-editor__notes_title--dark': isDarkMode,
+                    })}
                     placeholder="Write the title..."
                     value={objNote.title}
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void => handleTextArea(event, 'title')}
                 />
                 <textarea
-                    className="container-editor__notes_description"
+                    className={classNames('container-editor__notes_description', {
+                        'container-editor__notes_description--dark': isDarkMode,
+                    })}
                     placeholder="Write the desciption..."
                     value={objNote.description}
-                    contentEditable
                     onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
                         handleTextArea(event, 'description')
                     }
                     style={{ fontSize: objNote.fontSize, textAlign: objNote.textAlign } as React.CSSProperties}
                 />
-                {uploadedImg ? <img src={uploadedImg} alt="#" className="container-editor__img_uploaded" /> : null}
+                {/* {uploadedImg ? (
+                    <img src={uploadedImg} alt="uploaded img" className="container-editor__img_uploaded" />
+                ) : null} */}
             </div>
         </div>
     );

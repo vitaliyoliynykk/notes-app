@@ -35,7 +35,7 @@ class Auth extends React.Component<RouteComponentProps> {
                     <a href="https://github.com/leshihak" target="blank" className="container-auth__owner">
                         /leshihak
                     </a>
-                    <img src={GitHub} alt="logo" className="container-auth__img" />
+                    <img src={GitHub} alt="logo GitHub" className="container-auth__img" />
                 </footer>
             </div>
         );

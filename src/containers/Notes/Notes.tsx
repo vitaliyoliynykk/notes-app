@@ -5,10 +5,14 @@ import { Note, NotesState } from '../../models/models';
 import './Notes.scss';
 import NoteItemsList from '../../components/NoteItemsList/NoteItemsList';
 import TextEditor from '../../components/TextEditor/TextEditor';
-
+import { ReactComponent as AddNote } from '../../assets/addnote.svg';
+import { ReactComponent as LogOut } from '../../assets/logout.svg';
+import { ReactComponent as DarkMode } from '../../assets/moon.svg';
+import { ReactComponent as LightMode } from '../../assets/sunlight.svg';
 import { FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
-import LogOut from '../../assets/logout.svg';
-import Plus from '../../assets/plus.svg';
+import Loader from '../../components/Loader/Loader';
+import SearchInput from '../../components/SearchInput/SearchInput';
+import classNames from 'classnames';
 
 class Notes extends React.Component<{}, NotesState> {
     public static contextType = AuthContext;
@@ -21,6 +25,11 @@ class Notes extends React.Component<{}, NotesState> {
             user: null,
             activeNote: null,
             notes: [],
+            isDarkMode: false,
+            loading: true,
+            isOpenNotesList: false,
+            searchValue: null,
+            searchNotes: [],
         };
     }
 
@@ -36,19 +45,28 @@ class Notes extends React.Component<{}, NotesState> {
             .then((snapshot) => {
                 if (snapshot.val()) {
                     const notes: Note[] = Object.values(snapshot.val());
-                    this.setState({ ...this.state, notes, activeNote: notes[FIRST_ELEMENT] });
+                    const sortedArrayByDate = notes.sort((a, b) => +new Date(b.date) - +new Date(a.date));
+                    this.setState({
+                        ...this.state,
+                        notes: sortedArrayByDate,
+                        activeNote: sortedArrayByDate[FIRST_ELEMENT],
+                        loading: false,
+                    });
                 } else {
                     const note = getDefaultNote();
-                    this.setState({ ...this.state, notes: [note], activeNote: note });
+                    this.setState({ ...this.state, notes: [note], activeNote: note, loading: true });
                 }
+            })
+            .catch(() => {
+                this.setState({ ...this.state, loading: false });
             });
     }
 
     private updateNoteInLocalState(note: Note): Note[] {
+        note.date = Date.now();
         const stateNotes = this.state.notes;
         const indexToEdit = stateNotes.findIndex((stateNote) => stateNote.id === note.id);
         stateNotes[indexToEdit] = note;
-
         return stateNotes;
     }
 
@@ -60,7 +78,11 @@ class Notes extends React.Component<{}, NotesState> {
 
     private onNoteChange(note: Note): void {
         const updatedNotes = this.updateNoteInLocalState(note);
-        this.setState({ ...this.state, notes: updatedNotes });
+        const arraySortedByDate = updatedNotes.sort((a, b) => +b.date - +a.date);
+        this.setState({
+            ...this.state,
+            notes: arraySortedByDate,
+        });
         this.saveNoteToFirebase(note);
     }
 
@@ -68,6 +90,7 @@ class Notes extends React.Component<{}, NotesState> {
         this.setState({
             ...this.state,
             activeNote: note,
+            isOpenNotesList: true,
         });
     }
 
@@ -81,38 +104,124 @@ class Notes extends React.Component<{}, NotesState> {
         app.auth().signOut();
     }
 
+    private removeNoteItem(id: string): void {
+        this.setState({ ...this.state, notes: this.state.notes.filter((note) => note.id !== id) });
+    }
+
+    private switchDarkMode(): void {
+        this.setState({ ...this.state, isDarkMode: true });
+    }
+
+    private openMobileLayout(): void {
+        this.setState({ ...this.state, isOpenNotesList: true });
+    }
+
+    private getSearchInputValue(input: string): void {
+        const filteredArray = this.filterArrayBySearchValue(input);
+        this.setState({ ...this.state, searchNotes: filteredArray, searchValue: input });
+    }
+
+    public filterArrayBySearchValue = (input: string): Note[] => {
+        const arrayFilteredBySearchValue = this.state.notes.filter((note) =>
+            note.title.toLowerCase().includes(input.toLowerCase()),
+        );
+        return arrayFilteredBySearchValue;
+    };
+
     public render(): React.ReactElement {
+        const noteListClass = classNames('notes__list', {
+            'notes__list--dark': this.state.isDarkMode,
+            'notes__list--hide': this.state.isOpenNotesList,
+        });
+
         return (
-            <div className="container-notes">
-                <div className="notes__menu">
-                    {this.state.user && (
-                        <img src={this.state.user.photoURL as string} alt="user" className="user-photo" />
-                    )}
-                    <img
-                        src={Plus}
-                        alt="Add note"
-                        className="notes__menu-img-add"
-                        onClick={this.addNewNote.bind(this)}
-                    />
-                    <img src={LogOut} alt="Log out" className="notes__menu-img-exit" onClick={this.logOutFromNoteApp} />
-                </div>
-                <div className="notes__list">
-                    <NoteItemsList
-                        arrayOfNotes={this.state.notes}
-                        removeNoteItem={(): null => null}
-                        selectNoteItem={this.setActiveNote.bind(this)}
-                        activeNoteIdProp={this.state.activeNote?.id}
-                    ></NoteItemsList>
-                </div>
-                <div className="notes__editor">
-                    {this.state.activeNote ? (
-                        <TextEditor
-                            noteItem={this.state.activeNote}
-                            onChange={(note): void => this.onNoteChange(note)}
-                        ></TextEditor>
-                    ) : null}
-                </div>
-            </div>
+            <>
+                {this.state.loading ? (
+                    <div className="loader-component">
+                        <Loader />
+                    </div>
+                ) : (
+                    <div className="container-notes">
+                        <div
+                            className={classNames('notes__menu', {
+                                'notes__menu--dark': this.state.isDarkMode,
+                            })}
+                        >
+                            {this.state.user && (
+                                <img src={this.state.user.photoURL as string} alt="user" className="user-photo" />
+                            )}
+                            <AddNote
+                                style={this.state.isDarkMode ? { fill: 'black' } : { fill: 'white' }}
+                                className="notes__img"
+                                onClick={this.addNewNote.bind(this)}
+                            />
+                            {this.state.isDarkMode ? (
+                                <LightMode
+                                    style={this.state.isDarkMode ? { fill: 'black' } : { fill: 'white' }}
+                                    className="notes__img"
+                                    onClick={(): void => this.setState({ ...this.state, isDarkMode: false })}
+                                />
+                            ) : (
+                                <DarkMode
+                                    style={this.state.isDarkMode ? { fill: 'black' } : { fill: 'white' }}
+                                    className="notes__img"
+                                    onClick={this.switchDarkMode.bind(this)}
+                                />
+                            )}
+                            <LogOut
+                                style={this.state.isDarkMode ? { fill: 'black' } : { fill: 'white' }}
+                                className="notes__img"
+                                onClick={this.logOutFromNoteApp}
+                            />
+                        </div>
+                        {this.state.isOpenNotesList ? (
+                            <button
+                                className={classNames('notes__btn', { 'notes__btn--dark': this.state.isDarkMode })}
+                                onClick={(): void => this.setState({ ...this.state, isOpenNotesList: false })}
+                            >
+                                Show
+                            </button>
+                        ) : (
+                            <button
+                                className={classNames('notes__btn', { 'notes__btn--dark': this.state.isDarkMode })}
+                                onClick={this.openMobileLayout.bind(this)}
+                            >
+                                Hide
+                            </button>
+                        )}
+                        <div className={noteListClass}>
+                            <SearchInput
+                                getSearchInputValue={this.getSearchInputValue.bind(this)}
+                                isDarkMode={this.state.isDarkMode}
+                            />
+                            <NoteItemsList
+                                arrayOfNotes={
+                                    this.state.searchValue && this.state.searchValue.trim().length > FIRST_ELEMENT
+                                        ? this.state.searchNotes
+                                        : this.state.notes
+                                }
+                                removeNoteItem={this.removeNoteItem.bind(this)}
+                                selectNoteItem={this.setActiveNote.bind(this)}
+                                activeNoteIdProp={this.state.activeNote?.id}
+                                isDarkMode={this.state.isDarkMode}
+                            />
+                        </div>
+                        <div
+                            className={classNames('notes__editor', {
+                                'notes__editor--dark': this.state.isDarkMode,
+                            })}
+                        >
+                            {this.state.activeNote ? (
+                                <TextEditor
+                                    noteItem={this.state.activeNote}
+                                    onChange={(note): void => this.onNoteChange(note)}
+                                    isDarkMode={this.state.isDarkMode}
+                                ></TextEditor>
+                            ) : null}
+                        </div>
+                    </div>
+                )}
+            </>
         );
     }
 }
