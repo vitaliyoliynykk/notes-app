@@ -6,7 +6,7 @@ import './Notes.scss';
 import NoteItemsList from '../../components/NoteItemsList/NoteItemsList';
 import TextEditor from '../../components/TextEditor/TextEditor';
 
-import { emptyValue, FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
+import { FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import Loader from '../../components/Loader/Loader';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import classNames from 'classnames';
