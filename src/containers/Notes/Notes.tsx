@@ -5,14 +5,11 @@ import { Note, NotesState } from '../../models/models';
 import './Notes.scss';
 import NoteItemsList from '../../components/NoteItemsList/NoteItemsList';
 import TextEditor from '../../components/TextEditor/TextEditor';
-import { ReactComponent as AddNote } from '../../assets/addnote.svg';
-import { ReactComponent as LogOut } from '../../assets/logout.svg';
-import { ReactComponent as DarkMode } from '../../assets/moon.svg';
-import { ReactComponent as LightMode } from '../../assets/sunlight.svg';
 import { emptyValue, FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import Loader from '../../components/Loader/Loader';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import classNames from 'classnames';
+import { Menu } from '../../components/Menu/Menu';
 
 class Notes extends React.Component<{}, NotesState> {
     public static contextType = AuthContext;
@@ -54,7 +51,7 @@ class Notes extends React.Component<{}, NotesState> {
                     });
                 } else {
                     const note = getDefaultNote();
-                    this.setState({ ...this.state, notes: [note], activeNote: note, loading: true });
+                    this.setState({ ...this.state, notes: [note], activeNote: note, loading: false });
                 }
             })
             .catch(() => {
@@ -109,7 +106,7 @@ class Notes extends React.Component<{}, NotesState> {
     }
 
     private switchDarkMode(): void {
-        this.setState({ ...this.state, isDarkMode: true });
+        this.setState({ ...this.state, isDarkMode: !this.state.isDarkMode });
     }
 
     private openMobileLayout(): void {
@@ -128,6 +125,23 @@ class Notes extends React.Component<{}, NotesState> {
         return arrayFilteredBySearchValue;
     };
 
+    public actionMenu = (action: string): void => {
+        switch (action) {
+            case 'add-note':
+                this.addNewNote();
+                break;
+            case 'log-out':
+                this.logOutFromNoteApp();
+                break;
+            case 'switch-mode':
+                this.switchDarkMode();
+                break;
+
+            default:
+                break;
+        }
+    };
+
     public render(): React.ReactElement {
         const noteListClass = classNames('notes__list', {
             'notes__list--dark': this.state.isDarkMode,
@@ -142,38 +156,7 @@ class Notes extends React.Component<{}, NotesState> {
                     </div>
                 ) : (
                     <div className="container-notes">
-                        <div
-                            className={classNames('notes__menu', {
-                                'notes__menu--dark': this.state.isDarkMode,
-                            })}
-                        >
-                            {this.state.user && (
-                                <img src={this.state.user.photoURL as string} alt="user" className="user-photo" />
-                            )}
-                            <AddNote
-                                style={this.state.isDarkMode ? { fill: 'black' } : { fill: 'white' }}
-                                className="notes__img"
-                                onClick={this.addNewNote.bind(this)}
-                            />
-                            {this.state.isDarkMode ? (
-                                <LightMode
-                                    style={this.state.isDarkMode ? { fill: 'black' } : { fill: 'white' }}
-                                    className="notes__img"
-                                    onClick={(): void => this.setState({ ...this.state, isDarkMode: false })}
-                                />
-                            ) : (
-                                <DarkMode
-                                    style={this.state.isDarkMode ? { fill: 'black' } : { fill: 'white' }}
-                                    className="notes__img"
-                                    onClick={this.switchDarkMode.bind(this)}
-                                />
-                            )}
-                            <LogOut
-                                style={this.state.isDarkMode ? { fill: 'black' } : { fill: 'white' }}
-                                className="notes__img"
-                                onClick={this.logOutFromNoteApp}
-                            />
-                        </div>
+                        <Menu actionMenu={this.actionMenu} isDarkMode={this.state.isDarkMode} user={this.state.user} />
                         {this.state.isOpenNotesList ? (
                             <button
                                 className={classNames('notes__btn', { 'notes__btn--dark': this.state.isDarkMode })}
