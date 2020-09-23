@@ -9,7 +9,7 @@ import { ReactComponent as AddNote } from '../../assets/addnote.svg';
 import { ReactComponent as LogOut } from '../../assets/logout.svg';
 import { ReactComponent as DarkMode } from '../../assets/moon.svg';
 import { ReactComponent as LightMode } from '../../assets/sunlight.svg';
-import { FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
+import { emptyValue, FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import Loader from '../../components/Loader/Loader';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import classNames from 'classnames';
@@ -27,6 +27,7 @@ class Notes extends React.Component<{}, NotesState> {
             notes: [],
             isDarkMode: false,
             loading: true,
+            isOpenNotesList: false,
             searchValue: null,
             searchNotes: [],
         };
@@ -62,6 +63,7 @@ class Notes extends React.Component<{}, NotesState> {
     }
 
     private updateNoteInLocalState(note: Note): Note[] {
+        note.date = Date.now();
         const stateNotes = this.state.notes;
         const indexToEdit = stateNotes.findIndex((stateNote) => stateNote.id === note.id);
         stateNotes[indexToEdit] = note;
@@ -76,7 +78,11 @@ class Notes extends React.Component<{}, NotesState> {
 
     private onNoteChange(note: Note): void {
         const updatedNotes = this.updateNoteInLocalState(note);
-        this.setState({ ...this.state, notes: updatedNotes });
+        const arraySortedByDate = updatedNotes.sort((a, b) => +b.date - +a.date);
+        this.setState({
+            ...this.state,
+            notes: arraySortedByDate,
+        });
         this.saveNoteToFirebase(note);
     }
 
@@ -84,6 +90,7 @@ class Notes extends React.Component<{}, NotesState> {
         this.setState({
             ...this.state,
             activeNote: note,
+            isOpenNotesList: true,
         });
     }
 
@@ -105,6 +112,10 @@ class Notes extends React.Component<{}, NotesState> {
         this.setState({ ...this.state, isDarkMode: true });
     }
 
+    private openMobileLayout(): void {
+        this.setState({ ...this.state, isOpenNotesList: true });
+    }
+
     private getSearchInputValue(input: string): void {
         const filteredArray = this.filterArrayBySearchValue(input);
         this.setState({ ...this.state, searchNotes: filteredArray, searchValue: input });
@@ -118,6 +129,11 @@ class Notes extends React.Component<{}, NotesState> {
     };
 
     public render(): React.ReactElement {
+        const noteListClass = classNames('notes__list', {
+            'notes__list--dark': this.state.isDarkMode,
+            'notes__list--hide': this.state.isOpenNotesList,
+        });
+
         return (
             <>
                 {this.state.loading ? (
@@ -158,11 +174,22 @@ class Notes extends React.Component<{}, NotesState> {
                                 onClick={this.logOutFromNoteApp}
                             />
                         </div>
-                        <div
-                            className={classNames('notes__list', {
-                                'notes__list--dark': this.state.isDarkMode,
-                            })}
-                        >
+                        {this.state.isOpenNotesList ? (
+                            <button
+                                className={classNames('notes__btn', { 'notes__btn--dark': this.state.isDarkMode })}
+                                onClick={(): void => this.setState({ ...this.state, isOpenNotesList: false })}
+                            >
+                                Show
+                            </button>
+                        ) : (
+                            <button
+                                className={classNames('notes__btn', { 'notes__btn--dark': this.state.isDarkMode })}
+                                onClick={this.openMobileLayout.bind(this)}
+                            >
+                                Hide
+                            </button>
+                        )}
+                        <div className={noteListClass}>
                             <SearchInput
                                 getSearchInputValue={this.getSearchInputValue.bind(this)}
                                 isDarkMode={this.state.isDarkMode}
