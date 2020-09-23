@@ -5,6 +5,7 @@ import { Note, NotesState } from '../../models/models';
 import './Notes.scss';
 import NoteItemsList from '../../components/NoteItemsList/NoteItemsList';
 import TextEditor from '../../components/TextEditor/TextEditor';
+
 import { emptyValue, FIRST_ELEMENT, getDefaultNote } from './Notes.constants';
 import Loader from '../../components/Loader/Loader';
 import SearchInput from '../../components/SearchInput/SearchInput';
@@ -183,7 +184,7 @@ class Notes extends React.Component<{}, NotesState> {
                             />
                             <NoteItemsList
                                 arrayOfNotes={
-                                    this.state.searchValue && this.state.searchValue.trim().length > emptyValue
+                                    this.state.searchValue && this.state.searchValue.trim().length > FIRST_ELEMENT
                                         ? this.state.searchNotes
                                         : this.state.notes
                                 }

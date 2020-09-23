@@ -11,7 +11,7 @@ export const RemoveModal = ({
     isDarkMode,
 }: {
     closeModal: () => void;
-    handleRemove: () => void;
+    handleRemove: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     modalTitle: string;
     isDarkMode: boolean;
 }): React.ReactElement => {
