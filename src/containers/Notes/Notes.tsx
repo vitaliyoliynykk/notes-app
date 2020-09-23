@@ -105,7 +105,7 @@ class Notes extends React.Component<{}, NotesState> {
         this.setState({ ...this.state, notes: this.state.notes.filter((note) => note.id !== id) });
     }
 
-    private switchDarkMode(): void {
+    private switchMode(): void {
         this.setState({ ...this.state, isDarkMode: !this.state.isDarkMode });
     }
 
@@ -125,16 +125,16 @@ class Notes extends React.Component<{}, NotesState> {
         return arrayFilteredBySearchValue;
     };
 
-    public actionMenu = (action: string): void => {
+    public onMenuItemClick = (action: string): void => {
         switch (action) {
-            case 'add-note':
+            case 'addNote':
                 this.addNewNote();
                 break;
-            case 'log-out':
+            case 'logOut':
                 this.logOutFromNoteApp();
                 break;
-            case 'switch-mode':
-                this.switchDarkMode();
+            case 'switchMode':
+                this.switchMode();
                 break;
 
             default:
@@ -156,7 +156,11 @@ class Notes extends React.Component<{}, NotesState> {
                     </div>
                 ) : (
                     <div className="container-notes">
-                        <Menu actionMenu={this.actionMenu} isDarkMode={this.state.isDarkMode} user={this.state.user} />
+                        <Menu
+                            onMenuItemClick={this.onMenuItemClick}
+                            isDarkMode={this.state.isDarkMode}
+                            user={this.state.user}
+                        />
                         {this.state.isOpenNotesList ? (
                             <button
                                 className={classNames('notes__btn', { 'notes__btn--dark': this.state.isDarkMode })}

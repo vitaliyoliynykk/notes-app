@@ -7,7 +7,7 @@ import { ReactComponent as LogOut } from '../../assets/logout.svg';
 import { ReactComponent as DarkMode } from '../../assets/moon.svg';
 import { ReactComponent as LightMode } from '../../assets/sunlight.svg';
 
-export const Menu = ({ actionMenu, isDarkMode, user }: MenuProps): React.ReactElement => {
+export const Menu = ({ onMenuItemClick, isDarkMode, user }: MenuProps): React.ReactElement => {
     return (
         <div
             className={classNames('notes__menu', {
@@ -18,25 +18,25 @@ export const Menu = ({ actionMenu, isDarkMode, user }: MenuProps): React.ReactEl
             <AddNote
                 style={isDarkMode ? { fill: 'black' } : { fill: 'white' }}
                 className="notes__img"
-                onClick={(): void => actionMenu('add-note')}
+                onClick={(): void => onMenuItemClick('addNote')}
             />
             {isDarkMode ? (
                 <LightMode
                     style={isDarkMode ? { fill: 'black' } : { fill: 'white' }}
                     className="notes__img"
-                    onClick={(): void => actionMenu('switch-mode')}
+                    onClick={(): void => onMenuItemClick('switchMode')}
                 />
             ) : (
                 <DarkMode
                     style={isDarkMode ? { fill: 'black' } : { fill: 'white' }}
                     className="notes__img"
-                    onClick={(): void => actionMenu('switch-mode')}
+                    onClick={(): void => onMenuItemClick('switchMode')}
                 />
             )}
             <LogOut
                 style={isDarkMode ? { fill: 'black' } : { fill: 'white' }}
                 className="notes__img"
-                onClick={(): void => actionMenu('log-out')}
+                onClick={(): void => onMenuItemClick('logOut')}
             />
         </div>
     );

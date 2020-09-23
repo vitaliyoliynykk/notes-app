@@ -28,7 +28,7 @@ export interface NotesState {
 }
 
 export interface MenuProps {
-    actionMenu: (action: string) => void;
+    onMenuItemClick: (action: string) => void;
     isDarkMode: boolean;
     user: firebase.User | null;
 }
