@@ -54,7 +54,7 @@ class Notes extends React.Component<{}, NotesState> {
                     });
                 } else {
                     const note = getDefaultNote();
-                    this.setState({ ...this.state, notes: [note], activeNote: note, loading: true });
+                    this.setState({ ...this.state, notes: [note], activeNote: note, loading: false });
                 }
             })
             .catch(() => {
