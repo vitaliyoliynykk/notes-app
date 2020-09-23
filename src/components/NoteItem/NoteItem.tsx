@@ -27,7 +27,8 @@ const NoteItem = ({
         setIsOpen(false);
     };
 
-    const handleRemoveNoteItem = (id: string): void => {
+    const handleRemoveNoteItem = (id: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        event.stopPropagation();
         closeModal();
         deleteNoteItem(id);
     };
@@ -55,7 +56,9 @@ const NoteItem = ({
             {modalIsOpen ? (
                 <RemoveModal
                     closeModal={closeModal}
-                    handleRemove={(): void => handleRemoveNoteItem(note.id)}
+                    handleRemove={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void =>
+                        handleRemoveNoteItem(note.id, event)
+                    }
                     modalTitle={REMOVE_NOTE_TITLE}
                     isDarkMode={isDarkMode}
                 />
