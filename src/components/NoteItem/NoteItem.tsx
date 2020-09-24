@@ -11,11 +11,13 @@ const NoteItem = ({
     deleteNoteItem,
     isActive,
     isDarkMode,
+    isOneNoteInArray,
 }: {
     note: Note;
     deleteNoteItem: (id: string) => void;
     isActive: boolean;
     isDarkMode: boolean;
+    isOneNoteInArray: boolean;
 }): React.ReactElement => {
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -35,6 +37,7 @@ const NoteItem = ({
 
     const noteClass = classNames('container-note', {
         'container-note--dark': isDarkMode,
+        'container-note--hide': isOneNoteInArray,
         'container-note--dark--active': isDarkMode && isActive,
         'container-note--active': !isDarkMode && isActive,
     });

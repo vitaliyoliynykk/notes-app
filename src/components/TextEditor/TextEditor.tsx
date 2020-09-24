@@ -32,7 +32,7 @@ const TextEditor = ({
     // };
 
     const handleFontSize = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-        const note = { ...objNote, fontSize: `${event.target.value}px` };
+        const note = { ...objNote, fontSize: event.target.value };
         onChange(note);
         setObjNote(note);
     };
@@ -61,16 +61,17 @@ const TextEditor = ({
                         'container-editor__select--dark': isDarkMode,
                     })}
                     onChange={handleFontSize}
+                    value={objNote.fontSize}
                 >
-                    <option value="10">10px</option>
-                    <option value="14">14px</option>
-                    <option value="18">18px</option>
-                    <option value="22">22px</option>
-                    <option value="26">26px</option>
-                    <option value="30">30px</option>
-                    <option value="34">34px</option>
-                    <option value="38">38px</option>
-                    <option value="42">42px</option>
+                    <option value="10px">10px</option>
+                    <option value="14px">14px</option>
+                    <option value="18px">18px</option>
+                    <option value="22px">22px</option>
+                    <option value="26px">26px</option>
+                    <option value="30px">30px</option>
+                    <option value="34px">34px</option>
+                    <option value="38px">38px</option>
+                    <option value="42px">42px</option>
                 </select>
                 <div className="container-editor__img_block">
                     <TextLeft
