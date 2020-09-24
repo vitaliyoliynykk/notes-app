@@ -37,7 +37,6 @@ const NoteItem = ({
 
     const noteClass = classNames('container-note', {
         'container-note--dark': isDarkMode,
-        'container-note--hide': isOneNoteInArray,
         'container-note--dark--active': isDarkMode && isActive,
         'container-note--active': !isDarkMode && isActive,
     });
@@ -50,7 +49,14 @@ const NoteItem = ({
         <div className={noteClass}>
             <div className="container-note__header">
                 <div className="container-note__header_date">{formatDate(note)}</div>
-                <img src={RemoveImg} alt="remove icon" className="container-note__header_img" onClick={openModal} />
+                <img
+                    src={RemoveImg}
+                    alt="remove icon"
+                    className={classNames('container-note__header_img', {
+                        'container-note__header_img--hide': isOneNoteInArray,
+                    })}
+                    onClick={openModal}
+                />
             </div>
             <div className="container-note__bottom">
                 <div className="container-note__bottom_title">{note.title}</div>

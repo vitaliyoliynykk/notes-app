@@ -25,8 +25,11 @@ const NoteItemsList = ({
         if (activeNoteIdProp) {
             setActiveNoteId(activeNoteIdProp);
         }
+    }, [activeNoteIdProp]);
+
+    useEffect(() => {
         arrayOfNotes.length === ONE_NOTE_IN_ARRAY ? setIsOneNoteInArray(true) : setIsOneNoteInArray(false);
-    }, [activeNoteIdProp, arrayOfNotes]);
+    }, [arrayOfNotes]);
 
     const deleteNoteItem = (id: string): void => {
         removeNoteItem(id);

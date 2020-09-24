@@ -21,17 +21,13 @@
         background-color: black;
         color: white;
     }
-    &--hide {
-        &:hover {
-            .container-note__header_img {
-                display: none !important;
-            }
-        }
-    }
     &:hover {
         @extend .container-note--active;
         .container-note__header_img {
             opacity: 1;
+            &--hide {
+                display: none !important;
+            }
         }
     }
     &__header {
