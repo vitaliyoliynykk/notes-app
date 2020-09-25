@@ -66,3 +66,16 @@
         }
     }
 }
+
+@media (max-width: 800px) {
+    .container-modal {
+        &__block {
+            max-width: 250px;
+            height: 250px;
+            text-align: center;
+        }
+        &__block_title {
+            font-size: 20px;
+        }
+    }
+}

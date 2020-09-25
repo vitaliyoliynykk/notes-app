@@ -84,6 +84,9 @@
             background-color: white;
             color: black;
         }
+        &:focus {
+            outline: none;
+        }
     }
 
     .notes__list {

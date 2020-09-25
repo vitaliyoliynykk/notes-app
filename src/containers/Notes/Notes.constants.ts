@@ -11,3 +11,4 @@ export const getDefaultNote = (): Note => ({
 });
 
 export const FIRST_ELEMENT = 0;
+export const ONE_NOTE_IN_ARRAY = 1;
