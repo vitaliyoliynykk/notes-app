@@ -11,11 +11,13 @@ const NoteItem = ({
     deleteNoteItem,
     isActive,
     isDarkMode,
+    isOneNoteInArray,
 }: {
     note: Note;
     deleteNoteItem: (id: string) => void;
     isActive: boolean;
     isDarkMode: boolean;
+    isOneNoteInArray: boolean;
 }): React.ReactElement => {
     const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -27,7 +29,8 @@ const NoteItem = ({
         setIsOpen(false);
     };
 
-    const handleRemoveNoteItem = (id: string): void => {
+    const handleRemoveNoteItem = (id: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        event.stopPropagation();
         closeModal();
         deleteNoteItem(id);
     };
@@ -46,7 +49,14 @@ const NoteItem = ({
         <div className={noteClass}>
             <div className="container-note__header">
                 <div className="container-note__header_date">{formatDate(note)}</div>
-                <img src={RemoveImg} alt="remove icon" className="container-note__header_img" onClick={openModal} />
+                <img
+                    src={RemoveImg}
+                    alt="remove icon"
+                    className={classNames('container-note__header_img', {
+                        'container-note__header_img--hide': isOneNoteInArray,
+                    })}
+                    onClick={openModal}
+                />
             </div>
             <div className="container-note__bottom">
                 <div className="container-note__bottom_title">{note.title}</div>
@@ -55,7 +65,9 @@ const NoteItem = ({
             {modalIsOpen ? (
                 <RemoveModal
                     closeModal={closeModal}
-                    handleRemove={(): void => handleRemoveNoteItem(note.id)}
+                    handleRemove={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void =>
+                        handleRemoveNoteItem(note.id, event)
+                    }
                     modalTitle={REMOVE_NOTE_TITLE}
                     isDarkMode={isDarkMode}
                 />

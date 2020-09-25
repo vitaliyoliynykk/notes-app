@@ -26,3 +26,9 @@ export interface NotesState {
     isOpenNotesList: boolean;
     searchValue: string | null;
 }
+
+export interface MenuProps {
+    onMenuItemClick: (action: string) => void;
+    isDarkMode: boolean;
+    user: firebase.User | null;
+}

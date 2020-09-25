@@ -25,12 +25,16 @@
         @extend .container-note--active;
         .container-note__header_img {
             opacity: 1;
+            &--hide {
+                display: none !important;
+            }
         }
     }
     &__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        height: 25px;
         &_date {
             font-size: 10px;
             letter-spacing: 3px;
@@ -54,5 +58,13 @@
     }
     &__block {
         padding: 10px;
+    }
+}
+
+@media (max-width: 800px) {
+    .container-note {
+        &__header_img {
+            opacity: 1;
+        }
     }
 }

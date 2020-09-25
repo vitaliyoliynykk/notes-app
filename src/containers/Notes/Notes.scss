@@ -19,6 +19,11 @@
             transition: linear 0.2s;
             background-color: rgb(36, 36, 36);
         }
+        &--dark {
+            &:hover {
+                color: white;
+            }
+        }
     }
     &__menu {
         background-color: black;
@@ -78,6 +83,9 @@
         &--dark {
             background-color: white;
             color: black;
+        }
+        &:focus {
+            outline: none;
         }
     }
 
