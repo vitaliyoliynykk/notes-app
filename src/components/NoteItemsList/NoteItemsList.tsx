@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NoteItem from '../NoteItem/NoteItem';
 import { Note } from '../../models/models';
-
-const firstElement = 0;
+import { FIRST_ELEMENT, ONE_NOTE_IN_ARRAY } from '../../containers/Notes/Notes.constants';
 
 const NoteItemsList = ({
     arrayOfNotes,
@@ -18,14 +17,19 @@ const NoteItemsList = ({
     isDarkMode: boolean;
 }): React.ReactElement => {
     const [activeNoteId, setActiveNoteId] = useState<string>(
-        arrayOfNotes.length > firstElement ? arrayOfNotes[firstElement].id : '',
+        arrayOfNotes.length > FIRST_ELEMENT ? arrayOfNotes[FIRST_ELEMENT].id : '',
     );
+    const [isOneNoteInArray, setIsOneNoteInArray] = useState(false);
 
     useEffect(() => {
         if (activeNoteIdProp) {
             setActiveNoteId(activeNoteIdProp);
         }
     }, [activeNoteIdProp]);
+
+    useEffect(() => {
+        arrayOfNotes.length === ONE_NOTE_IN_ARRAY ? setIsOneNoteInArray(true) : setIsOneNoteInArray(false);
+    }, [arrayOfNotes]);
 
     const deleteNoteItem = (id: string): void => {
         removeNoteItem(id);
@@ -45,6 +49,7 @@ const NoteItemsList = ({
                         deleteNoteItem={deleteNoteItem}
                         isActive={note.id === activeNoteId}
                         isDarkMode={isDarkMode}
+                        isOneNoteInArray={isOneNoteInArray}
                     />
                 </div>
             );
