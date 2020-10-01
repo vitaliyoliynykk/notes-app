@@ -103,8 +103,14 @@ class Notes extends React.Component<{}, NotesState> {
     }
 
     private removeNoteItem(id: string): void {
-        this.setState({ ...this.state, notes: this.state.notes.filter((note) => note.id !== id) });
+        const firstElementInArray = this.state.notes[FIRST_ELEMENT];
         this.database.ref(`/users/${this.state.user?.uid}/notes/${id}`).set(null);
+        this.setState({
+            ...this.state,
+            notes: this.state.notes.filter((note) => note.id !== id),
+            activeNote: firstElementInArray,
+            isOpenNotesList: false,
+        });
     }
 
     private switchMode(): void {
